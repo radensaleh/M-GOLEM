@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -29,6 +28,22 @@
         android:padding="15sp">
 
         <android.support.design.widget.TextInputLayout
+            android:layout_marginTop="10dp"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true">
+
+            <EditText
+                android:id="@+id/etNama"
+                android:drawableLeft="@drawable/ic_person_white_24dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorAccent"
+                android:hint=" Nama Lengkap"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true">
@@ -38,9 +53,26 @@
                 android:drawableLeft="@drawable/ic_credit_card_white_24dp"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
+                android:inputType="number"
                 android:hint=" Nim"
                 android:textColor="@color/colorAccent" />
 
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true">
+
+            <EditText
+                android:id="@+id/etEmail"
+                android:drawableLeft="@drawable/ic_email_white_24dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorAccent"
+                android:inputType="textEmailAddress"
+                android:hint=" Email"/>
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -60,21 +92,6 @@
                 android:hint=" Password"/>
         </android.support.design.widget.TextInputLayout>
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_marginTop="10dp"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true">
-
-            <EditText
-                android:id="@+id/etNama"
-                android:drawableLeft="@drawable/ic_person_white_24dp"
-                android:layout_marginTop="10dp"
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
-                android:textColor="@color/colorAccent"
-                android:hint=" Nama Lengkap"/>
-        </android.support.design.widget.TextInputLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -102,21 +119,6 @@
                 android:layout_marginLeft="5dp">
             </Spinner>
         </LinearLayout>
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true">
-
-            <EditText
-                android:id="@+id/etEmail"
-                android:drawableLeft="@drawable/ic_email_white_24dp"
-                android:layout_marginTop="10dp"
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
-                android:textColor="@color/colorAccent"
-                android:hint=" Email"/>
-        </android.support.design.widget.TextInputLayout>
 
     </LinearLayout>
 
@@ -148,7 +150,6 @@
             android:textColor="@color/colorAccent"
             android:textStyle="bold"
             android:text=" Masuk "/>
-
     </LinearLayout>
 
 </LinearLayout>
