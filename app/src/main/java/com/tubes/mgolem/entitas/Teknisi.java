@@ -1,8 +1,6 @@
 package com.tubes.mgolem.entitas;
 
 public class Teknisi {
-
-    //Ehh guled kuy :v
-
-    // nyoba lgi
+    private String id_teknisi;
+    private String nama;
 }
