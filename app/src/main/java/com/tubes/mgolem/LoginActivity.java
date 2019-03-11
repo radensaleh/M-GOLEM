@@ -10,10 +10,17 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.tubes.mgolem.entitas.Mahasiswa;
+import com.tubes.mgolem.entitas.Teknisi;
+
+import java.util.List;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -21,7 +28,9 @@ public class LoginActivity extends AppCompatActivity {
     private Context mContext;
     private Dialog alertDialog;
     private Button btnYa, btnTidak, btnMasuk;
+    private Spinner spLogin;
     private EditText etNim, etPassword;
+    private String[] aktor = {"Mahasiswa", "Teknisi"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,17 +43,33 @@ public class LoginActivity extends AppCompatActivity {
         etNim      = findViewById(R.id.etNim);
         etPassword = findViewById(R.id.etPassword);
         btnMasuk   = findViewById(R.id.btnMasuk);
+        spLogin    = findViewById(R.id.spinnerLogin);
+
+        final ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, aktor);
+        spLogin.setAdapter(adapter);
 
         btnMasuk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(etNim.equals("")){
+                String nim = etNim.getText().toString();
+                String pass = etPassword.getText().toString();
+
+                if(nim.isEmpty()){
                     Toast.makeText(mContext, "Nim Kosong", Toast.LENGTH_LONG).show();
-                }else if(etPassword.equals("")){
+                }else if(nim.isEmpty()){
                     Toast.makeText(mContext, "Passoword Kosong", Toast.LENGTH_LONG).show();
                 }else{
-                    Toast.makeText(mContext, "Proses Login", Toast.LENGTH_LONG).show();
+                    if(spLogin.getSelectedItemPosition()==0){
+                        Mahasiswa mhs = new Mahasiswa();
+                        mhs.login(nim, pass);
+                    }else {
+                        Teknisi teknisi = new Teknisi();
+                        teknisi.login(nim, pass);
+                    }
+
                 }
+
+
             }
         });
 
