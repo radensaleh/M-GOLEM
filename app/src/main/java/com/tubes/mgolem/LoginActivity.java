@@ -11,14 +11,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class LoginActivity extends AppCompatActivity {
 
     private TextView tvDaftar;
     private Context mContext;
     private Dialog alertDialog;
-    private Button btnYa, btnTidak;
+    private Button btnYa, btnTidak, btnMasuk;
+    private EditText etNim, etPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +30,23 @@ public class LoginActivity extends AppCompatActivity {
 
         mContext = this;
         alertDialog = new Dialog(mContext);
+
+        etNim      = findViewById(R.id.etNim);
+        etPassword = findViewById(R.id.etPassword);
+        btnMasuk   = findViewById(R.id.btnMasuk);
+
+        btnMasuk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(etNim.equals("")){
+                    Toast.makeText(mContext, "Nim Kosong", Toast.LENGTH_LONG).show();
+                }else if(etPassword.equals("")){
+                    Toast.makeText(mContext, "Passoword Kosong", Toast.LENGTH_LONG).show();
+                }else{
+                    Toast.makeText(mContext, "Proses Login", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
 
         tvDaftar = findViewById(R.id.tvDaftar);
         tvDaftar.setOnClickListener(new View.OnClickListener() {

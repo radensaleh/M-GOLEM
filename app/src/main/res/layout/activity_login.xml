@@ -65,6 +65,7 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/btnMasuk"
         android:layout_marginTop="10dp"
         android:layout_width="250dp"
         android:text="MASUK"
