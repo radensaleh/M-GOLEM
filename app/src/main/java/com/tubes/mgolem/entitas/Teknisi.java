@@ -4,5 +4,5 @@ public class Teknisi {
 
     //Ehh guled kuy :v
 
-    // nyoba lgi nih
+    // nyoba lgi
 }
