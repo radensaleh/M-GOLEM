@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">M-GOLEM</string>
+
+    <string name="barang">Barang</string>
+    <string name="mhs">Mahasiswa</string>
+    <string name="pinjam">Peminjaman</string>
+    <string name="introMahasiswa">Mahasiswa dapat meminjam barang \ndi Jurusan Teknik Informatika dengan mudah dan cepat</string>
+    <string name="introBarang">Setiap barang sudah dilengkapi \ndengan QR Code</string>
+    <string name="introPinjam">Peminjaman barang dengan \nmudah dan cepat menggunakan \nScan Barcode</string>
+</resources>

@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@color/colorPrimary"
+    tools:context=".DaftarActivity">
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/ic_person_add_white_24dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="DAFTAR"
+        android:textSize="20sp"
+        android:textColor="@color/colorAccent"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="15sp">
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true">
+
+            <EditText
+                android:id="@+id/etNim"
+                android:drawableLeft="@drawable/ic_credit_card_white_24dp"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:hint=" Nim"
+                android:textColor="@color/colorAccent" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_marginTop="10dp"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true">
+
+            <EditText
+                android:id="@+id/etPassword"
+                android:drawableLeft="@drawable/ic_lock_outline_white_24dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorAccent"
+                android:inputType="textPassword"
+                android:hint=" Password"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_marginTop="10dp"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true">
+
+            <EditText
+                android:id="@+id/etNama"
+                android:drawableLeft="@drawable/ic_person_white_24dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorAccent"
+                android:hint=" Nama Lengkap"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:drawableLeft="@drawable/ic_class_white_24dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18dp"
+                android:layout_marginTop="14dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginBottom="5dp"
+                android:textColor="@color/colorAccent"
+                android:text=" Kelas " />
+
+            <Spinner
+                android:id="@+id/spinnerKelas"
+                android:backgroundTint="@color/colorAccent"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_width="165dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="5dp">
+            </Spinner>
+        </LinearLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true">
+
+            <EditText
+                android:id="@+id/etEmail"
+                android:drawableLeft="@drawable/ic_email_white_24dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorAccent"
+                android:hint=" Email"/>
+        </android.support.design.widget.TextInputLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:layout_marginTop="5dp"
+        android:layout_width="250dp"
+        android:text="DAFTAR"
+        android:textColor="@color/colorAccent"
+        android:background="@drawable/btn_shape"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_marginTop="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorAccent"
+            android:text="Sudah punya akun? "/>
+
+        <TextView
+            android:id="@+id/tvMasuk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorAccent"
+            android:textStyle="bold"
+            android:text=" Masuk "/>
+
+    </LinearLayout>
+
+</LinearLayout>
