@@ -24,5 +24,7 @@ public class MainActivity extends AppCompatActivity {
         Handler handler = new Handler();
         handler.postDelayed(rn, 2000);
 
+        // tambah komentar
+
     }
 }
