@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class DaftarActivity extends AppCompatActivity {
@@ -17,6 +18,7 @@ public class DaftarActivity extends AppCompatActivity {
     private TextView tvMasuk;
     private Dialog alertDialog;
     private Button btnYa, btnTidak;
+    private EditText etNim, etNama, etPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +28,10 @@ public class DaftarActivity extends AppCompatActivity {
         mContext = this;
         tvMasuk = findViewById(R.id.tvMasuk);
         alertDialog = new Dialog(mContext);
+
+        etNim       = findViewById(R.id.etNim);
+        etNama      = findViewById(R.id.etNama);
+        etPassword  = findViewById(R.id.etPassword);
 
         tvMasuk.setOnClickListener(new View.OnClickListener() {
             @Override

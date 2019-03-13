@@ -15,7 +15,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.tubes.mgolem.entitas.Mahasiswa;
 import com.tubes.mgolem.entitas.Teknisi;
@@ -55,9 +54,11 @@ public class LoginActivity extends AppCompatActivity {
                 String pass = etPassword.getText().toString();
 
                 if(nim.isEmpty()){
-                    Toast.makeText(mContext, "Nim Kosong", Toast.LENGTH_LONG).show();
-                }else if(nim.isEmpty()){
-                    Toast.makeText(mContext, "Passoword Kosong", Toast.LENGTH_LONG).show();
+                    etNim.setError("Nim Kosong");
+                }else if(nim.length() < 7){
+                    etNim.setError("7 Character Minimun");
+                }else if(pass.isEmpty()){
+                    etPassword.setError("Password Kosong");
                 }else{
                     if(spLogin.getSelectedItemPosition()==0){
                         Mahasiswa mhs = new Mahasiswa();
