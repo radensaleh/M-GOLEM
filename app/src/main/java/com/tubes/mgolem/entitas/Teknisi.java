@@ -1,11 +1,11 @@
 package com.tubes.mgolem.entitas;
 
 public class Teknisi {
-    private String idTeknisi;
+    private String username;
     private String nama;
     private String password;
 
-    public void login (String id_teknisi, String password){
+    public void login (String username, String password){
 
     }
 

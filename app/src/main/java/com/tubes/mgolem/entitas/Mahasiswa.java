@@ -5,7 +5,6 @@ import java.util.ArrayList;
 public class Mahasiswa {
     private String nim;
     private String nama;
-    private String email;
     private String kelas;
     private String password;
     private Peminjaman peminjaman;
