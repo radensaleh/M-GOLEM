@@ -7,7 +7,7 @@ public class Mahasiswa {
     private String nama;
     private String kelas;
     private String password;
-    private Peminjaman peminjaman;
+    private ArrayList<Peminjaman> peminjamanList;
     private ArrayList<Barang> listBarang;
 
     public void login(String nim, String password){
@@ -15,14 +15,12 @@ public class Mahasiswa {
     }
 
     public void pinjamBarang(){
-        peminjaman = new Peminjaman();
+        Peminjaman peminjaman = new Peminjaman();
+        peminjamanList.add(peminjaman);
     }
 
     public void ubahPassword(String password){
 
     }
 
-    public void tambahBarang(Barang barang){
-        listBarang.add(barang);
-    }
 }

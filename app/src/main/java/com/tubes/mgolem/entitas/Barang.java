@@ -5,4 +5,17 @@ public class Barang {
     private String kategori;
     private String tipe;
     private String merk;
+
+    public Barang(String idBarang, String kategori) {
+        this.idBarang = idBarang;
+        this.kategori = kategori;
+    }
+
+    public String getIdBarang() {
+        return idBarang;
+    }
+
+    public String getKategori() {
+        return kategori;
+    }
 }
