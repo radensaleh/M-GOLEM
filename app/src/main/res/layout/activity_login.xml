@@ -18,7 +18,7 @@
         android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="MASUK"
+        android:text="MAHASISWA"
         android:textSize="20sp"
         android:textColor="@color/colorAccent"/>
 
@@ -62,34 +62,7 @@
                 android:inputType="textPassword"
                 android:hint=" Password"/>
         </android.support.design.widget.TextInputLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:drawableLeft="@drawable/ic_accessibility_white_24dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="15dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginLeft="3dp"
-                android:layout_marginBottom="5dp"
-                android:textColor="@color/colorAccent"
-                android:text=" Sebagai " />
-
-            <Spinner
-                android:id="@+id/spinnerLogin"
-                android:backgroundTint="@color/colorAccent"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:layout_width="165dp"
-                android:layout_height="40dp"
-                android:layout_marginLeft="5dp">
-            </Spinner>
-        </LinearLayout>
-
+        
     </LinearLayout>
 
     <Button

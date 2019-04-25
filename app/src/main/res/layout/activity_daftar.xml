@@ -94,7 +94,7 @@
 
             <Spinner
                 android:id="@+id/spinnerKelas"
-                android:backgroundTint="@color/colorAccent"
+                android:background="@color/transparent"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
                 android:layout_width="165dp"
@@ -106,6 +106,7 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/btnDaftar"
         android:layout_marginTop="5dp"
         android:layout_width="250dp"
         android:text="DAFTAR"

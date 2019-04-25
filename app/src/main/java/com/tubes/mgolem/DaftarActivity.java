@@ -8,16 +8,31 @@ import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
+
+import com.tubes.mgolem.Api.KelasAPI;
+import com.tubes.mgolem.Rest.RetrofitClient;
+import com.tubes.mgolem.entitas.Kelas;
+import com.tubes.mgolem.entitas.ListKelas;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class DaftarActivity extends AppCompatActivity {
 
     private Context mContext;
     private TextView tvMasuk;
     private Dialog alertDialog;
-    private Button btnYa, btnTidak;
+    private Spinner spinnerKelas;
+    private Button btnYa, btnTidak, btnDaftar ;
     private EditText etNim, etNama, etPassword;
 
     @Override
@@ -32,6 +47,8 @@ public class DaftarActivity extends AppCompatActivity {
         etNim       = findViewById(R.id.etNim);
         etNama      = findViewById(R.id.etNama);
         etPassword  = findViewById(R.id.etPassword);
+        spinnerKelas = findViewById(R.id.spinnerKelas);
+        btnDaftar = findViewById(R.id.btnDaftar);
 
         tvMasuk.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,6 +58,14 @@ public class DaftarActivity extends AppCompatActivity {
                 finish();
             }
         });
+        ListKelas listKelas = ListKelas.getInstance();
+        ArrayAdapter<Kelas> adapter = new ArrayAdapter<>(getApplicationContext(),
+                android.R.layout.simple_spinner_dropdown_item, listKelas.getListKelas());
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerKelas.setAdapter(adapter);
+
+        
+
     }
 
     @Override
@@ -52,6 +77,8 @@ public class DaftarActivity extends AppCompatActivity {
         btnYa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                int pid = android.os.Process.myPid();
+                android.os.Process.killProcess(pid);
                 finish();
             }
         });

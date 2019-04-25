@@ -24,7 +24,7 @@ public class Slider extends MaterialIntroActivity {
     @Override
     public void onFinish() {
         super.onFinish();
-        Intent i = new Intent(Slider.this, LoginActivity.class);
+        Intent i = new Intent(Slider.this, PilihLogin.class);
         startActivity(i);
     }
 }

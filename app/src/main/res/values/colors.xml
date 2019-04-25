@@ -13,4 +13,6 @@
     <color name="colorYellowLight">#ffeb3b</color>
     <color name="colorYellow">#fbc02d</color>
     <color name="colorYellowDark">#f9a825</color>
+
+    <color name="my_spinner_text_color">#FFEB3B</color>
 </resources>

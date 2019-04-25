@@ -1,6 +1,6 @@
-package com.tubes.mgolem.entitas;
+package com.tubes.mgolem.Api;
 
-public class Kelas {
+public class KelasAPI {
     private String id_kelas;
     private String nama_kelas;
 
@@ -18,10 +18,5 @@ public class Kelas {
 
     public void setNama_kelas(String nama_kelas) {
         this.nama_kelas = nama_kelas;
-    }
-
-    @Override
-    public String toString(){
-        return nama_kelas;
     }
 }
