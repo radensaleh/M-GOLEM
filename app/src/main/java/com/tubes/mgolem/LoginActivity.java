@@ -19,7 +19,6 @@ import android.widget.TextView;
 import com.tubes.mgolem.entitas.Mahasiswa;
 import com.tubes.mgolem.entitas.Teknisi;
 
-import java.util.List;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -27,7 +26,6 @@ public class LoginActivity extends AppCompatActivity {
     private Context mContext;
     private Dialog alertDialog;
     private Button btnYa, btnTidak, btnMasuk;
-    private Spinner spLogin;
     private EditText etNim, etPassword;
     private String[] aktor = {"Mahasiswa", "Teknisi"};
 
@@ -42,10 +40,6 @@ public class LoginActivity extends AppCompatActivity {
         etNim      = findViewById(R.id.etNim);
         etPassword = findViewById(R.id.etPassword);
         btnMasuk   = findViewById(R.id.btnMasuk);
-        spLogin    = findViewById(R.id.spinnerLogin);
-
-        final ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, aktor);
-        spLogin.setAdapter(adapter);
 
         btnMasuk.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,23 +48,17 @@ public class LoginActivity extends AppCompatActivity {
                 String pass = etPassword.getText().toString();
 
                 if(nim.isEmpty()){
-                    etNim.setError("Nim Kosong");
+                    etNim.setError("Username Kosong");
                 }else if(nim.length() < 7){
-                    etNim.setError("7 Character Minimun");
+                    etNim.setError("Minimal 8 karakter");
                 }else if(pass.isEmpty()){
                     etPassword.setError("Password Kosong");
+                }else if(pass.length()< 8){
+                    etPassword.setError("Minimal 8 karakter");
                 }else{
-                    if(spLogin.getSelectedItemPosition()==0){
-                        Mahasiswa mhs = new Mahasiswa();
-                        mhs.login(nim, pass);
-                    }else {
-                        Teknisi teknisi = new Teknisi();
-                        teknisi.login(nim, pass);
-                    }
-
+                    Mahasiswa mhs = Mahasiswa.getInstance();
+                    mhs.login(nim, pass, mContext);
                 }
-
-
             }
         });
 
@@ -95,6 +83,8 @@ public class LoginActivity extends AppCompatActivity {
         btnYa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                int pid = android.os.Process.myPid();
+                android.os.Process.killProcess(pid);
                 finish();
             }
         });
@@ -111,4 +101,11 @@ public class LoginActivity extends AppCompatActivity {
         alertDialog.setCancelable(false);
         alertDialog.show();
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        finish();
+    }
+
 }

@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.tubes.mgolem.LoginActivity;
+import com.tubes.mgolem.PilihLogin;
 import com.tubes.mgolem.R;
 
 import agency.tango.materialintroscreen.SlideFragment;
@@ -27,7 +28,7 @@ public class SlidePinjam extends SlideFragment {
         btnLewati.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(view.getContext(), LoginActivity.class);
+                Intent i = new Intent(view.getContext(), PilihLogin.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(i);
             }
