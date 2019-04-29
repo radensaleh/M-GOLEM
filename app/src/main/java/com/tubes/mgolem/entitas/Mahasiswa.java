@@ -77,6 +77,50 @@ public class Mahasiswa {
         });
     }
 
+    public void registrasi(String nama, String nim, String password, String kelas, final Context context){
+        Mahasiswa mhs = Mahasiswa.getInstance();
+        mhs.setNim(nim);
+        mhs.setKelas(kelas);
+        mhs.setPassword(password);
+        mhs.setNama(nama);
+
+        Call<Response> call = RetrofitClient.getInstance().baseAPI().registrasi(nama, nim, password, kelas);
+
+        call.enqueue(new Callback<Response>() {
+            @Override
+            public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
+                if(response.body().getErrorRes().equals("0")){
+                    Mahasiswa mhs = Mahasiswa.getInstance();
+
+                    UserDAO userDAO = new UserDAO(context);
+                    if(userDAO.getUser()==null){
+                        userDAO.setUser(mhs.getNim(), mhs.getPassword(), "2");
+                        new AlertDialog.Builder(context).setTitle("Registrasi berhasil").setMessage("Selamat datang "+response.body().getNama()).setCancelable(false)
+                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        Intent intent = new Intent(context, MenuMhsActivity.class);
+                                        context.startActivity(intent);
+                                    }
+                                }).show();
+                    }else{
+                        Intent intent = new Intent(context, MenuMhsActivity.class);
+                        context.startActivity(intent);
+                    }
+                }else if(response.body().getErrorRes().equals("1")){
+                    Toast.makeText(context, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(context,response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Response> call, Throwable t) {
+
+            }
+        });
+    }
+
     public void pinjamBarang(){
         Peminjaman peminjaman = new Peminjaman();
         peminjamanList.add(peminjaman);

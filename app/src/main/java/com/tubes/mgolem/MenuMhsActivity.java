@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.tubes.mgolem.ActivityTeknisi.DataPengembalianActivity;
 import com.tubes.mgolem.SQLite.UserDAO;
 
 public class MenuMhsActivity extends AppCompatActivity {
@@ -26,6 +27,7 @@ public class MenuMhsActivity extends AppCompatActivity {
         userDAO = new UserDAO(context);
         alertDialog = new Dialog(context);
 
+
         btnLogout=findViewById(R.id.btnLogoutMhs);
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -33,8 +35,9 @@ public class MenuMhsActivity extends AppCompatActivity {
                 logout();
             }
         });
-    }
 
+
+    }
     public void logout(){
         alertDialog.setContentView(R.layout.alert_keluar);
         btnTidak = alertDialog.findViewById(R.id.btnTidak);

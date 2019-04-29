@@ -12,13 +12,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.tubes.mgolem.ActivityTeknisi.DataPengembalianActivity;
 import com.tubes.mgolem.SQLite.UserDAO;
 import com.tubes.mgolem.entitas.Teknisi;
 
 public class MenuTeknisiActivity extends AppCompatActivity {
     Context context;
     Dialog alertDialog;
-    private Button btnYa, btnTidak, btnLogout;
+    private Button btnYa, btnTidak, btnLogout, btnVerifPeminjaman, btnVerifPengembalian, btnDataPeminjaman, btnDataPengembalian;
     private UserDAO  userDAO;
 
     @Override
@@ -40,6 +41,47 @@ public class MenuTeknisiActivity extends AppCompatActivity {
         });
 
         Teknisi teknisi = Teknisi.getInstance();
+
+        btnVerifPeminjaman  = findViewById(R.id.btnVerifPeminjaman);
+        btnVerifPengembalian = findViewById(R.id.btnVerifikasiPengembalian);
+        btnDataPeminjaman = findViewById(R.id.btnDataPeminjaman);
+        btnDataPengembalian = findViewById(R.id.btnDataPengembalian);
+
+        btnVerifPengembalian.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MenuTeknisiActivity.this, DataPengembalianActivity.class);
+                intent.putExtra(DataPengembalianActivity.MENU, "VerifPengembalian");
+                startActivity(intent);
+            }
+        });
+
+        btnVerifPeminjaman.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MenuTeknisiActivity.this, DataPengembalianActivity.class);
+                intent.putExtra(DataPengembalianActivity.MENU, "VerifPeminjaman");
+                startActivity(intent);
+            }
+        });
+
+        btnDataPeminjaman.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MenuTeknisiActivity.this, DataPengembalianActivity.class);
+                intent.putExtra(DataPengembalianActivity.MENU, "DataPeminjaman");
+                startActivity(intent);
+            }
+        });
+
+        btnDataPengembalian.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MenuTeknisiActivity.this, DataPengembalianActivity.class);
+                intent.putExtra(DataPengembalianActivity.MENU, "Data Pengembalian");
+                startActivity(intent);
+            }
+        });
 
         Toast.makeText(context, teknisi.getNama()+" "+teknisi.getUsername(), Toast.LENGTH_SHORT).show();
     }

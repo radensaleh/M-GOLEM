@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="5dp"
+    app:cardCornerRadius="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="5dp"
+        android:layout_marginLeft="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ID Peminjaman : "
+                android:textStyle="bold"
+                android:textSize="18dp"
+                android:layout_marginBottom="5dp"
+                android:textColor="#000"/>
+
+            <TextView
+                android:id="@+id/tvIdPeminjaman"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="VVIP"
+                android:textStyle="bold"
+                android:textSize="18dp"
+                android:layout_marginBottom="5dp"
+                android:textColor="#000"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Peminjam : "
+                android:textSize="15dp"
+                android:layout_marginBottom="5dp"
+                android:textColor="#000"/>
+
+            <TextView
+                android:id="@+id/tvNimMhs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="NIM"
+                android:textSize="15dp"
+                android:layout_marginBottom="5dp"
+                android:textColor="#000"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layoutTeknisiPinjam"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Teknisi Pinjam : "
+                android:textSize="15dp"
+                android:layout_marginBottom="5dp"
+                android:textColor="#000"/>
+
+            <TextView
+                android:id="@+id/tvUserTeknisiPinjam"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Username"
+                android:textSize="15dp"
+                android:layout_marginBottom="5dp"
+                android:textColor="#000"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layoutTeknisiKembali"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Teknisi Kembali : "
+                android:textSize="15dp"
+                android:layout_marginBottom="5dp"
+                android:textColor="#000"/>
+
+            <TextView
+                android:id="@+id/tvUserTeknisiKembali"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Username"
+                android:textSize="15dp"
+                android:layout_marginBottom="5dp"
+                android:textColor="#000"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layoutTanggalPinjam"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tanggal Pinjam : "
+                android:textSize="15dp"
+                android:layout_marginBottom="5dp"
+                android:textColor="#000"/>
+
+            <TextView
+                android:id="@+id/tvTanggalPinjam"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="27/01/1999"
+                android:textSize="15dp"
+                android:layout_marginBottom="5dp"
+                android:textColor="#000"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layoutTanggalKembali"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tanggal Kembali : "
+                android:textSize="15dp"
+                android:layout_marginBottom="5dp"
+                android:textColor="#000"/>
+
+            <TextView
+                android:id="@+id/tvTanggalKembali"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="27/01/1999"
+                android:textSize="15dp"
+                android:layout_marginBottom="5dp"
+                android:textColor="#000"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nama Kegiatan : "
+                android:textSize="15dp"
+                android:layout_marginBottom="5dp"
+                android:textColor="#000"/>
+
+            <TextView
+                android:id="@+id/tvNamaKegiatan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ini nama kegiatan"
+                android:textSize="15dp"
+                android:layout_marginBottom="5dp"
+                android:textColor="#000"/>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnVerifikasi"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:text="Verifikasi Pengembalian"
+            android:textColor="@color/colorAccent"
+            android:background="@drawable/btn_shape"
+            android:layout_height="wrap_content" />
+
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

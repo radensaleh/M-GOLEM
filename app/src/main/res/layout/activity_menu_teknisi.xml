@@ -21,4 +21,40 @@
         android:background="@drawable/btn_shape"
         android:layout_height="wrap_content" />
 
+    <Button
+        android:id="@+id/btnVerifPeminjaman"
+        android:layout_marginTop="10dp"
+        android:layout_width="250dp"
+        android:text="Verifikasi Peminjaman"
+        android:textColor="@color/colorAccent"
+        android:background="@drawable/btn_shape"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btnVerifikasiPengembalian"
+        android:layout_marginTop="10dp"
+        android:layout_width="250dp"
+        android:text="Verifikasi Pengembalian"
+        android:textColor="@color/colorAccent"
+        android:background="@drawable/btn_shape"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btnDataPeminjaman"
+        android:layout_marginTop="10dp"
+        android:layout_width="250dp"
+        android:text="Data Peminjaman"
+        android:textColor="@color/colorAccent"
+        android:background="@drawable/btn_shape"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btnDataPengembalian"
+        android:layout_marginTop="10dp"
+        android:layout_width="250dp"
+        android:text="Data Pengembalian"
+        android:textColor="@color/colorAccent"
+        android:background="@drawable/btn_shape"
+        android:layout_height="wrap_content" />
+
 </LinearLayout>

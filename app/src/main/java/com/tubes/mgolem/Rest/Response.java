@@ -1,5 +1,9 @@
 package com.tubes.mgolem.Rest;
 
+import com.tubes.mgolem.entitas.Peminjaman;
+
+import java.util.List;
+
 public class Response {
 
     String errorRes;
@@ -8,6 +12,15 @@ public class Response {
     String username;
     String nama;
     String kelas;
+    List<Peminjaman> peminjaman;
+
+    public List<Peminjaman> getPeminjaman() {
+        return peminjaman;
+    }
+
+    public void setPeminjaman(List<Peminjaman> peminjaman) {
+        this.peminjaman = peminjaman;
+    }
 
     public String getErrorRes() {
         return errorRes;

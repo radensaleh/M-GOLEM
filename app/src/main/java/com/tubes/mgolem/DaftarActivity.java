@@ -8,6 +8,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,6 +19,7 @@ import com.tubes.mgolem.Api.KelasAPI;
 import com.tubes.mgolem.Rest.RetrofitClient;
 import com.tubes.mgolem.entitas.Kelas;
 import com.tubes.mgolem.entitas.ListKelas;
+import com.tubes.mgolem.entitas.Mahasiswa;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +36,7 @@ public class DaftarActivity extends AppCompatActivity {
     private Spinner spinnerKelas;
     private Button btnYa, btnTidak, btnDaftar ;
     private EditText etNim, etNama, etPassword;
+    private int kelas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,13 +61,35 @@ public class DaftarActivity extends AppCompatActivity {
                 finish();
             }
         });
-        ListKelas listKelas = ListKelas.getInstance();
+
+        final ListKelas listKelas = ListKelas.getInstance();
         ArrayAdapter<Kelas> adapter = new ArrayAdapter<>(getApplicationContext(),
                 android.R.layout.simple_spinner_dropdown_item, listKelas.getListKelas());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerKelas.setAdapter(adapter);
 
-        
+        spinnerKelas.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                kelas = position;
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        btnDaftar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Mahasiswa mhs = Mahasiswa.getInstance();
+                String nama = etNama.getText().toString();
+                String nim = etNim.getText().toString();
+                String password = etPassword.getText().toString();
+                String id_kelas = listKelas.getListKelas().get(kelas).getId_kelas();
+                mhs.registrasi(nama, nim, password, id_kelas, mContext);
+            }
+        });
 
     }
 
@@ -94,5 +119,11 @@ public class DaftarActivity extends AppCompatActivity {
         alertDialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
         alertDialog.setCancelable(false);
         alertDialog.show();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        finish();
     }
 }

@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/NoBarAppTheme">
-        <activity android:name=".MenuTeknisiActivity"></activity>
+        <activity android:name=".ActivityTeknisi.DataPengembalianActivity"></activity>
+        <activity android:name=".MenuTeknisiActivity" />
         <activity android:name=".MenuMhsActivity" />
         <activity android:name=".PilihLogin" />
         <activity android:name=".LoginTeknisiActivity" />

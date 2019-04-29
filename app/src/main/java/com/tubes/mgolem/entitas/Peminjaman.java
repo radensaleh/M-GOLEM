@@ -4,20 +4,17 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Peminjaman {
-    private String idPeminjaman;
-    private Date tglPinjam;
-    private Date tglKembali;
+    private String id_pinjam;
+    private String nim;
+    private String username_pinjam;
+    private String username_kembali;
+    private String nama_kegiatan;
+    private Date tgl_pinjam;
+    private Date tgl_kembali;
     private String status;
-    private ArrayList<Barang> barangList = new ArrayList<>();
+    //private ArrayList<Barang> barangList = new ArrayList<>();
 
-    public void addBarang(Barang barang){
-        this.barangList.add(barang);
 
-    }
-
-    public ArrayList<Barang> showBarang(){
-        return barangList;
-    }
 
     public void setStatus(String status){
         this.status = status;
@@ -27,18 +24,67 @@ public class Peminjaman {
         return status;
     }
 
+    public String getId_pinjam() {
+        return id_pinjam;
+    }
 
+    public void setId_pinjam(String id_pinjam) {
+        this.id_pinjam = id_pinjam;
+    }
 
-    public static void main(String[] args) {
-        Peminjaman peminjaman = new Peminjaman();
-        Barang barang = new Barang("id", "kategori");
+    public String getNim() {
+        return nim;
+    }
 
-        peminjaman.addBarang(barang);
+    public void setNim(String nim) {
+        this.nim = nim;
+    }
 
-        System.out.println(peminjaman.showBarang().get(0).getIdBarang());
+//    public String getUsername() {
+//        return username;
+//    }
+//
+//    public void setUsername(String username) {
+//        this.username = username;
+//    }
 
-        peminjaman.setStatus("Dikembalikan");
+    public String getNama_kegiatan() {
+        return nama_kegiatan;
+    }
 
-        System.out.println(peminjaman.getStatus());
+    public void setNama_kegiatan(String nama_kegiatan) {
+        this.nama_kegiatan = nama_kegiatan;
+    }
+
+    public Date getTgl_pinjam() {
+        return tgl_pinjam;
+    }
+
+    public void setTgl_pinjam(Date tgl_pinjam) {
+        this.tgl_pinjam = tgl_pinjam;
+    }
+
+    public Date getTgl_kembali() {
+        return tgl_kembali;
+    }
+
+    public void setTgl_kembali(Date tgl_kembali) {
+        this.tgl_kembali = tgl_kembali;
+    }
+
+    public String getUsername_pinjam() {
+        return username_pinjam;
+    }
+
+    public void setUsername_pinjam(String username_pinjam) {
+        this.username_pinjam = username_pinjam;
+    }
+
+    public String getUsername_kembali() {
+        return username_kembali;
+    }
+
+    public void setUsername_kembali(String username_kembali) {
+        this.username_kembali = username_kembali;
     }
 }
