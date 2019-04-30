@@ -9,24 +9,28 @@
     android:gravity="center"
     tools:context=".PilihLogin">
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:src="@drawable/ic_person_white_24dp"/>
+        app:civ_border_color="@color/colorAccent"
+        app:civ_border_width="3dp"
+        android:src="@drawable/user"/>
 
     <TextView
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="MASUK SEBAGAI : "
+        android:fontFamily="serif-monospace"
         android:textSize="20sp"
         android:textColor="@color/colorAccent"/>
 
     <Button
         android:id="@+id/btnLoginMhs"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:layout_width="250dp"
         android:text="MAHASISWA"
+        android:fontFamily="serif-monospace"
         android:textColor="@color/colorAccent"
         android:background="@drawable/btn_shape"
         android:layout_height="wrap_content" />
@@ -36,6 +40,7 @@
         android:layout_marginTop="10dp"
         android:layout_width="250dp"
         android:text="TEKNISI"
+        android:fontFamily="serif-monospace"
         android:textColor="@color/colorAccent"
         android:background="@drawable/btn_shape"
         android:layout_height="wrap_content" />
