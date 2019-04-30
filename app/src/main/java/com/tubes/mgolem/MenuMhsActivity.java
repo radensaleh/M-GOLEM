@@ -9,15 +9,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.tubes.mgolem.ActivityTeknisi.DataPengembalianActivity;
 import com.tubes.mgolem.SQLite.UserDAO;
+import com.tubes.mgolem.entitas.Mahasiswa;
 
 public class MenuMhsActivity extends AppCompatActivity {
     Context context;
     Dialog alertDialog;
     private Button btnYa, btnTidak, btnLogout;
     private UserDAO userDAO;
+    private TextView tvNama, tvNim;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +30,12 @@ public class MenuMhsActivity extends AppCompatActivity {
         userDAO = new UserDAO(context);
         alertDialog = new Dialog(context);
 
+        tvNim = findViewById(R.id.txtnim);
+        tvNama= findViewById(R.id.txtnama);
+
+        Mahasiswa mahasiswa = Mahasiswa.getInstance();
+        tvNama.setText(mahasiswa.getNama());
+        tvNim.setText("NIM. " + mahasiswa.getNim());
 
         btnLogout=findViewById(R.id.btnLogoutMhs);
         btnLogout.setOnClickListener(new View.OnClickListener() {

@@ -47,7 +47,7 @@
             android:layout_height="wrap_content"
             android:textSize="20dp"
             android:textColor="#FFF"
-            android:text="Teknisi"/>
+            android:text="Nama Teknisi"/>
 
         <TextView
             android:id="@+id/txtusername"
@@ -56,7 +56,7 @@
             android:layout_below="@id/txtnama"
             android:textSize="14dp"
             android:textColor="#FFF"
-            android:text="email@teknisi.com"/>
+            android:text="Username"/>
 
         <LinearLayout
             android:layout_below="@id/txtusername"
@@ -110,6 +110,8 @@
             android:layout_rowWeight="1"
             app:cardElevation="6dp"
             app:cardCornerRadius="12dp"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
             android:layout_margin="12dp">
 
             <LinearLayout
@@ -144,6 +146,8 @@
             android:layout_rowWeight="1"
             app:cardElevation="6dp"
             app:cardCornerRadius="12dp"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
             android:layout_margin="12dp">
 
             <LinearLayout
@@ -192,6 +196,8 @@
             android:layout_rowWeight="1"
             app:cardElevation="6dp"
             app:cardCornerRadius="12dp"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
             android:layout_margin="12dp">
 
             <LinearLayout
@@ -233,6 +239,8 @@
             android:layout_rowWeight="1"
             app:cardElevation="6dp"
             app:cardCornerRadius="12dp"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
             android:layout_margin="12dp">
 
             <LinearLayout

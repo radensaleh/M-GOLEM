@@ -54,8 +54,8 @@ public class MenuTeknisiActivity extends AppCompatActivity {
         cvVerifKembali= findViewById(R.id.cvVerifKembali);
 
 
-        tvUsername.setText(teknisi.getNama());
-        tvNama.setText(teknisi.getUsername());
+        tvUsername.setText("Username : " + teknisi.getUsername());
+        tvNama.setText(teknisi.getNama());
 
         cvPinjam.setOnClickListener(new View.OnClickListener() {
             @Override

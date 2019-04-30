@@ -6,7 +6,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
+import com.github.ybq.android.spinkit.sprite.Sprite;
+import com.github.ybq.android.spinkit.style.CubeGrid;
 import com.tubes.mgolem.R;
 import com.tubes.mgolem.entitas.Teknisi;
 
@@ -15,6 +19,9 @@ public class DataPengembalianActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
     private LayoutInflater inflater;
     public static String MENU;
+
+    private ProgressBar pb;
+    private TextView tvKosong;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,18 +33,27 @@ public class DataPengembalianActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
 
+        tvKosong = findViewById(R.id.tvKosong);
+        pb = findViewById(R.id.pb);
+        Sprite spkit = new CubeGrid();
+        pb.setIndeterminateDrawable(spkit);
+
         Teknisi teknisi = Teknisi.getInstance();
 
         String menu = getIntent().getStringExtra(MENU);
 
         if(menu.equals("VerifPengembalian")){
-            teknisi.lihatPeminjaman("3", this, recyclerView);
+            setTitle("Verifikasi Pengembalian");
+            teknisi.lihatPeminjaman("3", this, recyclerView, pb, tvKosong);
         }else if(menu.equals("VerifPeminjaman")){
-            teknisi.lihatPeminjaman("1", this ,recyclerView);
+            setTitle("Verifikasi Peminjaman");
+            teknisi.lihatPeminjaman("1", this ,recyclerView, pb, tvKosong);
         }else if(menu.equals("DataPeminjaman")){
-            teknisi.lihatPeminjaman("2", this, recyclerView);
+            setTitle("Data Peminjaman");
+            teknisi.lihatPeminjaman("2", this, recyclerView, pb, tvKosong);
         }else{
-            teknisi.lihatPeminjaman("0", this, recyclerView);
+            setTitle("Data Pengembalian");
+            teknisi.lihatPeminjaman("0", this, recyclerView, pb, tvKosong);
         }
 
 

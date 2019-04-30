@@ -107,7 +107,7 @@ public class Mahasiswa {
                             if(userDAO.getUser()==null){
                                 pd.dismiss();
                                 userDAO.setUser(mhs.getNim(), mhs.getPassword(), "2");
-                                new AlertDialog.Builder(context).setIcon(R.drawable.success).setTitle("Login berhasil").setMessage("Selamat Datang "+response.body().getNama()).setCancelable(false)
+                                new AlertDialog.Builder(context).setIcon(R.drawable.success).setTitle("Login Berhasil").setMessage("Selamat Datang "+response.body().getNama()).setCancelable(false)
                                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
@@ -176,7 +176,7 @@ public class Mahasiswa {
                     UserDAO userDAO = new UserDAO(context);
                     if(userDAO.getUser()==null){
                         userDAO.setUser(mhs.getNim(), mhs.getPassword(), "2");
-                        new AlertDialog.Builder(context).setTitle("Registrasi berhasil").setMessage("Selamat datang "+response.body().getNama()).setCancelable(false)
+                        new AlertDialog.Builder(context).setTitle("Registrasi Berhasil").setMessage("Selamat Datang "+response.body().getNama()).setCancelable(false)
                                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {

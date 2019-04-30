@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tubes.mgolem.Adapter.AdapterPeminjaman;
@@ -66,8 +67,6 @@ public class Teknisi {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
                                                 Intent intent = new Intent(context, MenuTeknisiActivity.class);
-                                                intent.putExtra("username", response.body().getUsername());
-                                                intent.putExtra("nama", response.body().getNama());
                                                 context.startActivity(intent);
                                             }
                                         }).show();
@@ -123,7 +122,7 @@ public class Teknisi {
                                 pd.dismiss();
                                 user.setUser(teknisi.getUsername(), teknisi.getPassword(), "1");
 
-                                new AlertDialog.Builder(context).setIcon(R.drawable.success).setTitle("Login berhasil").setMessage("Selamat datang "+response.body().getUsername()).setCancelable(false)
+                                new AlertDialog.Builder(context).setIcon(R.drawable.success).setTitle("Login Berhasil").setMessage("Selamat Datang "+response.body().getUsername()).setCancelable(false)
                                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
@@ -173,14 +172,20 @@ public class Teknisi {
 
     }
 
-    public void lihatPeminjaman(String status, final Context context, final RecyclerView recyclerView){
-        Call<List<Peminjaman>> call = RetrofitClient.getInstance().baseAPI().getPeminjaman(status);
+    public void lihatPeminjaman(final String status, final Context context, final RecyclerView recyclerView, final ProgressBar pb, final TextView tvKosong){
+        pb.setVisibility(View.VISIBLE);
+        tvKosong.setVisibility(View.INVISIBLE);
 
-        call.enqueue(new Callback<List<Peminjaman>>() {
+        Runnable rn = new Runnable() {
             @Override
-            public void onResponse(Call<List<Peminjaman>> call, retrofit2.Response<List<Peminjaman>> response) {
-                List<Peminjaman> listPeminjaman = response.body();
-
+            public void run() {
+                Call<List<Peminjaman>> call = RetrofitClient.getInstance().baseAPI().getPeminjaman(status);
+                call.enqueue(new Callback<List<Peminjaman>>() {
+                    @Override
+                    public void onResponse(Call<List<Peminjaman>> call, retrofit2.Response<List<Peminjaman>> response) {
+                       if(response.body().size() != 0){
+                           pb.setVisibility(View.GONE);
+                           List<Peminjaman> listPeminjaman = response.body();
 
 //                if(listPeminjaman==null) {
 //                    Toast.makeText(context, "data null", Toast.LENGTH_SHORT).show();
@@ -188,17 +193,28 @@ public class Teknisi {
 //                    Toast.makeText(context, "sukses", Toast.LENGTH_SHORT).show();
 //                }
 
-                AdapterPeminjaman adapterPeminjaman = new AdapterPeminjaman(listPeminjaman,context);
-                recyclerView.setAdapter(adapterPeminjaman);
-                adapterPeminjaman.notifyDataSetChanged();
+                           AdapterPeminjaman adapterPeminjaman = new AdapterPeminjaman(listPeminjaman,context);
+                           recyclerView.setAdapter(adapterPeminjaman);
+                           adapterPeminjaman.notifyDataSetChanged();
+                       }else{
+                           pb.setVisibility(View.GONE);
+                           tvKosong.setVisibility(View.VISIBLE);
+                       }
 
-            }
+                    }
 
-            @Override
-            public void onFailure(Call<List<Peminjaman>> call, Throwable t) {
-                Toast.makeText(context, "Gagal" , Toast.LENGTH_SHORT).show();
+                    @Override
+                    public void onFailure(Call<List<Peminjaman>> call, Throwable t) {
+                        Toast.makeText(context, "Gagal" , Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
-        });
+        };
+
+        Handler handler = new Handler();
+        handler.postDelayed(rn, 2000);
+
+
     }
 
     public void verifikasiPeminjaman(Peminjaman peminjaman, final Context context){
