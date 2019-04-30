@@ -12,10 +12,14 @@
         android:supportsRtl="true"
         android:theme="@style/NoBarAppTheme">
         <activity android:name=".ActivityTeknisi.DataPengembalianActivity"></activity>
-        <activity android:name=".MenuTeknisiActivity" />
+        <activity
+            android:name=".MenuTeknisiActivity"
+            android:theme="@style/MenuNoBar"/>
         <activity android:name=".MenuMhsActivity" />
         <activity android:name=".PilihLogin" />
-        <activity android:name=".LoginTeknisiActivity" />
+        <activity
+            android:name=".LoginTeknisiActivity"
+             />
         <activity android:name=".DaftarActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".MainActivity">

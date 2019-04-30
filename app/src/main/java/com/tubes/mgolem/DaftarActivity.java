@@ -88,6 +88,14 @@ public class DaftarActivity extends AppCompatActivity {
                 String password = etPassword.getText().toString();
                 String id_kelas = listKelas.getListKelas().get(kelas).getId_kelas();
                 mhs.registrasi(nama, nim, password, id_kelas, mContext);
+
+                if(nama.isEmpty()){
+                    etNama.setError("Nama Kosong");
+                }else if(nim.isEmpty()){
+                    etNim.setError("Nim Kosong");
+                }else if(password.isEmpty()){
+                    etPassword.setError("Password Kosong");
+                }
             }
         });
 

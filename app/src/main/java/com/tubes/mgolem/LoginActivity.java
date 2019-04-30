@@ -1,6 +1,7 @@
 package com.tubes.mgolem;
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -29,6 +30,8 @@ public class LoginActivity extends AppCompatActivity {
     private EditText etNim, etPassword;
     private String[] aktor = {"Mahasiswa", "Teknisi"};
 
+    private ProgressDialog pd;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +39,7 @@ public class LoginActivity extends AppCompatActivity {
 
         mContext = this;
         alertDialog = new Dialog(mContext);
+        pd = new ProgressDialog(mContext);
 
         etNim      = findViewById(R.id.etNim);
         etPassword = findViewById(R.id.etPassword);
@@ -57,7 +61,7 @@ public class LoginActivity extends AppCompatActivity {
                     etPassword.setError("Minimal 8 karakter");
                 }else{
                     Mahasiswa mhs = Mahasiswa.getInstance();
-                    mhs.login(nim, pass, mContext);
+                    mhs.login(nim, pass, mContext, pd);
                 }
             }
         });
@@ -75,31 +79,10 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed() {
-        alertDialog.setContentView(R.layout.alert_keluar);
-        btnTidak = alertDialog.findViewById(R.id.btnTidak);
-        btnYa    = alertDialog.findViewById(R.id.btnYa);
-
-        btnYa.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int pid = android.os.Process.myPid();
-                android.os.Process.killProcess(pid);
-                finish();
-            }
-        });
-
-        btnTidak.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                alertDialog.dismiss();
-            }
-        });
-
-        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        alertDialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
-        alertDialog.setCancelable(false);
-        alertDialog.show();
+    public void onBackPressed(){
+        Intent intent = new Intent(mContext, PilihLogin.class);
+        startActivity(intent);
+        finish();
     }
 
     @Override

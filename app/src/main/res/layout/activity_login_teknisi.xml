@@ -61,9 +61,6 @@
                 android:inputType="textPassword"
                 android:hint=" Password"/>
         </android.support.design.widget.TextInputLayout>
-
-
-
     </LinearLayout>
 
     <Button

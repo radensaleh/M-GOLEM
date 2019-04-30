@@ -3,16 +3,21 @@ package com.tubes.mgolem.entitas;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.tubes.mgolem.Adapter.AdapterPeminjaman;
 import com.tubes.mgolem.MenuMhsActivity;
 import com.tubes.mgolem.MenuTeknisiActivity;
+import com.tubes.mgolem.R;
 import com.tubes.mgolem.Rest.Response;
 import com.tubes.mgolem.Rest.RetrofitClient;
 import com.tubes.mgolem.SQLite.UserDAO;
@@ -37,36 +42,39 @@ public class Teknisi {
         return teknisi;
     }
     
-    public void login (String username, String password, final Context context){
+    public void login (final String username, final String password, final Context context){
         this.username=username;
         this.password=password;
 
-        Call<Response> call = RetrofitClient.getInstance().baseAPI().login(username,password);
-
-        call.enqueue(new Callback<Response>() {
+        Runnable rn = new Runnable() {
             @Override
-            public void onResponse(Call<Response> call, final retrofit2.Response<Response> response) {
-                if(response.body().getErrorRes().equals("0")){
+            public void run() {
+                Call<Response> call = RetrofitClient.getInstance().baseAPI().login(username,password);
+                call.enqueue(new Callback<Response>() {
+                    @Override
+                    public void onResponse(Call<Response> call, final retrofit2.Response<Response> response) {
+                        if(response.body().getErrorRes().equals("0")){
+                            Teknisi teknisi=Teknisi.getInstance();
+                            teknisi.setNama(response.body().getNama());
 
-                    Teknisi teknisi=Teknisi.getInstance();
-                    teknisi.setNama(response.body().getNama());
+                            UserDAO user = new UserDAO(context);
+                            if(user.getUser()==null){
+                                user.setUser(teknisi.getUsername(), teknisi.getPassword(), "1");
 
-                    UserDAO user = new UserDAO(context);
-                    if(user.getUser()==null){
-                        user.setUser(teknisi.getUsername(), teknisi.getPassword(), "1");
-
-                        new AlertDialog.Builder(context).setTitle("Login berhasil").setMessage("Selamat datang "+response.body().getUsername()).setCancelable(false)
-                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        Intent intent = new Intent(context, MenuTeknisiActivity.class);
-                                        context.startActivity(intent);
-                                    }
-                                }).show();
-                    }else{
-                        Intent intent = new Intent(context, MenuTeknisiActivity.class);
-                        context.startActivity(intent);
-                    }
+                                new AlertDialog.Builder(context).setTitle("Login berhasil").setMessage("Selamat Datang "+response.body().getNama()).setCancelable(false)
+                                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                Intent intent = new Intent(context, MenuTeknisiActivity.class);
+                                                intent.putExtra("username", response.body().getUsername());
+                                                intent.putExtra("nama", response.body().getNama());
+                                                context.startActivity(intent);
+                                            }
+                                        }).show();
+                            }else{
+                                Intent intent = new Intent(context, MenuTeknisiActivity.class);
+                                context.startActivity(intent);
+                            }
 
                 }else if(response.body().getErrorRes().equals("1")) {
                     Toast.makeText(context, response.body().getMessage(), Toast.LENGTH_SHORT).show();
@@ -75,11 +83,94 @@ public class Teknisi {
                 }
             }
 
-            @Override
-            public void onFailure(Call<Response> call, Throwable t) {
-                Toast.makeText(context,"Gagal", Toast.LENGTH_SHORT).show();
+                    @Override
+                    public void onFailure(Call<Response> call, Throwable t) {
+                        Toast.makeText(context,"Gagal", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
-        });
+        };
+
+        Handler handler = new Handler();
+        handler.postDelayed(rn, 2000);
+
+    }
+
+    public void login (final String username, final String password, final Context context, final ProgressDialog pd){
+        pd.setIcon(R.drawable.login);
+        pd.setTitle("Masuk");
+        pd.setMessage("Harap Menunggu. . .");
+        pd.setCancelable(false);
+        pd.show();
+
+        this.username=username;
+        this.password=password;
+
+        Runnable rn = new Runnable() {
+            @Override
+            public void run() {
+                Call<Response> call = RetrofitClient.getInstance().baseAPI().login(username,password);
+                call.enqueue(new Callback<Response>() {
+                    @Override
+                    public void onResponse(Call<Response> call, final retrofit2.Response<Response> response) {
+                        if(response.body().getErrorRes().equals("0")){
+                            pd.dismiss();
+                            Teknisi teknisi=Teknisi.getInstance();
+                            teknisi.setNama(response.body().getNama());
+
+                            UserDAO user = new UserDAO(context);
+                            if(user.getUser()==null){
+                                pd.dismiss();
+                                user.setUser(teknisi.getUsername(), teknisi.getPassword(), "1");
+
+                                new AlertDialog.Builder(context).setIcon(R.drawable.success).setTitle("Login berhasil").setMessage("Selamat datang "+response.body().getUsername()).setCancelable(false)
+                                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                Intent intent = new Intent(context, MenuTeknisiActivity.class);
+                                                context.startActivity(intent);
+                                            }
+                                        }).show();
+                            }else{
+                                pd.dismiss();
+                                Intent intent = new Intent(context, MenuTeknisiActivity.class);
+                                context.startActivity(intent);
+                            }
+
+                        }else if(response.body().getErrorRes().equals("1")) {
+                            pd.dismiss();
+                            //Toast.makeText(context, response.body().getMessageRes().getUsername()[0], Toast.LENGTH_SHORT).show();
+                                new AlertDialog.Builder(context).setIcon(R.drawable.failed).setTitle("Login Gagal").setMessage(response.body().getMessage()).setCancelable(false)
+                                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+
+                                            }
+                                        }).show();
+                        }else if(response.body().getErrorRes().equals("2")){
+                            pd.dismiss();
+                            new AlertDialog.Builder(context).setIcon(R.drawable.failed).setTitle("Login Gagal").setMessage(response.body().getMessage()).setCancelable(false)
+                                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+
+                                        }
+                                    }).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Response> call, Throwable t) {
+                        pd.dismiss();
+                        Toast.makeText(context,t.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        };
+
+        Handler handler = new Handler();
+        handler.postDelayed(rn, 2000);
+
     }
 
     public void lihatPeminjaman(String status, final Context context, final RecyclerView recyclerView){
@@ -100,6 +191,7 @@ public class Teknisi {
                 AdapterPeminjaman adapterPeminjaman = new AdapterPeminjaman(listPeminjaman,context);
                 recyclerView.setAdapter(adapterPeminjaman);
                 adapterPeminjaman.notifyDataSetChanged();
+
             }
 
             @Override
