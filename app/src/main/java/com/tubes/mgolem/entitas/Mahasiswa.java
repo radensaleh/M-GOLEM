@@ -1,13 +1,16 @@
 package com.tubes.mgolem.entitas;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Handler;
 import android.widget.Toast;
 
 import com.tubes.mgolem.MenuMhsActivity;
 import com.tubes.mgolem.MenuTeknisiActivity;
+import com.tubes.mgolem.R;
 import com.tubes.mgolem.Rest.Response;
 import com.tubes.mgolem.Rest.RetrofitClient;
 import com.tubes.mgolem.SQLite.UserDAO;
@@ -75,6 +78,84 @@ public class Mahasiswa {
                 Toast.makeText(context,"Gagal", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    public void login(final String nim, final String password, final Context context, final ProgressDialog pd){
+        pd.setIcon(R.drawable.login);
+        pd.setTitle("Masuk");
+        pd.setMessage("Harap Menunggu. . .");
+        pd.setCancelable(false);
+        pd.show();
+
+        this.nim = nim;
+        this.password=password;
+
+        Runnable rn = new Runnable() {
+            @Override
+            public void run() {
+                Call<Response> call = RetrofitClient.getInstance().baseAPI().loginMhs(nim,password);
+                call.enqueue(new Callback<Response>() {
+                    @Override
+                    public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
+                        if(response.body().getErrorRes().equals("0")){
+                            pd.dismiss();
+                            Mahasiswa mhs = Mahasiswa.getInstance();
+                            mhs.setNama(response.body().getNama());
+                            mhs.setKelas(response.body().getKelas());
+
+                            UserDAO userDAO = new UserDAO(context);
+                            if(userDAO.getUser()==null){
+                                pd.dismiss();
+                                userDAO.setUser(mhs.getNim(), mhs.getPassword(), "2");
+                                new AlertDialog.Builder(context).setIcon(R.drawable.success).setTitle("Login berhasil").setMessage("Selamat Datang "+response.body().getNama()).setCancelable(false)
+                                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                Intent intent = new Intent(context, MenuMhsActivity.class);
+                                                context.startActivity(intent);
+                                            }
+                                        }).show();
+                            }else{
+                                pd.dismiss();
+                                Intent intent = new Intent(context, MenuMhsActivity.class);
+                                context.startActivity(intent);
+                            }
+                        }else if(response.body().getErrorRes().equals("1")){
+                            pd.dismiss();
+//                            Toast.makeText(context, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                            new AlertDialog.Builder(context).setIcon(R.drawable.failed).setTitle("Login Gagal").setMessage(response.body().getMessage()).setCancelable(false)
+                                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+
+                                        }
+                                    }).show();
+                        }else{
+                            pd.dismiss();
+//                            Toast.makeText(context,response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                            new AlertDialog.Builder(context).setIcon(R.drawable.failed).setTitle("Login Gagal").setMessage(response.body().getMessage()).setCancelable(false)
+                                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+
+                                        }
+                                    }).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Response> call, Throwable t) {
+                        pd.dismiss();
+                        Toast.makeText(context,"Gagal", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        };
+
+        Handler handler = new Handler();
+        handler.postDelayed(rn, 2000);
+
+
     }
 
     public void registrasi(String nama, String nim, String password, String kelas, final Context context){

@@ -8,8 +8,10 @@ import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tubes.mgolem.ActivityTeknisi.DataPengembalianActivity;
@@ -19,8 +21,10 @@ import com.tubes.mgolem.entitas.Teknisi;
 public class MenuTeknisiActivity extends AppCompatActivity {
     Context context;
     Dialog alertDialog;
-    private Button btnYa, btnTidak, btnLogout, btnVerifPeminjaman, btnVerifPengembalian, btnDataPeminjaman, btnDataPengembalian;
+    private Button btnYa, btnTidak, btnLogout;
+    private CardView cvPinjam, cvKembali, cvVerifPinjam, cvVerifKembali;
     private UserDAO  userDAO;
+    private TextView tvUsername, tvNama;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +35,7 @@ public class MenuTeknisiActivity extends AppCompatActivity {
 
         userDAO=new UserDAO(context);
 
-        btnLogout=findViewById(R.id.btnLogoutTeknisi);
+        btnLogout=findViewById(R.id.btnLogout);
 
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,30 +46,18 @@ public class MenuTeknisiActivity extends AppCompatActivity {
 
         Teknisi teknisi = Teknisi.getInstance();
 
-        btnVerifPeminjaman  = findViewById(R.id.btnVerifPeminjaman);
-        btnVerifPengembalian = findViewById(R.id.btnVerifikasiPengembalian);
-        btnDataPeminjaman = findViewById(R.id.btnDataPeminjaman);
-        btnDataPengembalian = findViewById(R.id.btnDataPengembalian);
+        tvNama = findViewById(R.id.txtnama);
+        tvUsername = findViewById(R.id.txtusername);
+        cvPinjam = findViewById(R.id.cvPinjam);
+        cvKembali= findViewById(R.id.cvKembali);
+        cvVerifPinjam = findViewById(R.id.cvVerifPinjam);
+        cvVerifKembali= findViewById(R.id.cvVerifKembali);
 
-        btnVerifPengembalian.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MenuTeknisiActivity.this, DataPengembalianActivity.class);
-                intent.putExtra(DataPengembalianActivity.MENU, "VerifPengembalian");
-                startActivity(intent);
-            }
-        });
 
-        btnVerifPeminjaman.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MenuTeknisiActivity.this, DataPengembalianActivity.class);
-                intent.putExtra(DataPengembalianActivity.MENU, "VerifPeminjaman");
-                startActivity(intent);
-            }
-        });
+        tvUsername.setText(teknisi.getNama());
+        tvNama.setText(teknisi.getUsername());
 
-        btnDataPeminjaman.setOnClickListener(new View.OnClickListener() {
+        cvPinjam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MenuTeknisiActivity.this, DataPengembalianActivity.class);
@@ -74,7 +66,7 @@ public class MenuTeknisiActivity extends AppCompatActivity {
             }
         });
 
-        btnDataPengembalian.setOnClickListener(new View.OnClickListener() {
+        cvKembali.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MenuTeknisiActivity.this, DataPengembalianActivity.class);
@@ -83,7 +75,25 @@ public class MenuTeknisiActivity extends AppCompatActivity {
             }
         });
 
-        Toast.makeText(context, teknisi.getNama()+" "+teknisi.getUsername(), Toast.LENGTH_SHORT).show();
+        cvVerifPinjam.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MenuTeknisiActivity.this, DataPengembalianActivity.class);
+                intent.putExtra(DataPengembalianActivity.MENU, "VerifPeminjaman");
+                startActivity(intent);
+            }
+        });
+
+        cvVerifKembali.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MenuTeknisiActivity.this, DataPengembalianActivity.class);
+                intent.putExtra(DataPengembalianActivity.MENU, "VerifPengembalian");
+                startActivity(intent);
+            }
+        });
+
+        //Toast.makeText(context, teknisi.getNama()+" "+teknisi.getUsername(), Toast.LENGTH_SHORT).show();
     }
 
 

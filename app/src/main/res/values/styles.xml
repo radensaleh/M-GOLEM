@@ -16,6 +16,22 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!-- No Action Bar -->
+    <style name="LoginNoBar" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorYellowDark</item>
+    </style>
+
+    <!-- No Action Bar -->
+    <style name="MenuNoBar" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorYellow</item>
+        <item name="colorPrimaryDark">@color/colorYellowDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
     <!--Dialog Animation-->
     <style name="DialogAnimation">
         <item name="android:windowEnterAnimation">@anim/slide_up</item>
