@@ -44,7 +44,18 @@ public interface BaseAPI {
             @Query("status") String status
     );
 
+    @GET("mahasiswa")
+    Call<MahasiswaAPI> getMahasiswa(
+            @Query("nim") String nim
+    );
+
+    @GET("verifikasi")
+    Call<Response> verifikasi(
+            @Query("id_pinjam") String id_pinjam,
+            @Query("username") String username
+    );
 
     @GET("kelas")
     Call<List<KelasAPI>> kelas();
+
 }

@@ -69,7 +69,7 @@ public class Teknisi {
                     }
 
                 }else if(response.body().getErrorRes().equals("1")) {
-                    Toast.makeText(context, response.body().getMessageRes().getUsername()[0], Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, response.body().getMessage(), Toast.LENGTH_SHORT).show();
                 }else if(response.body().getErrorRes().equals("2")){
                     Toast.makeText(context,response.body().getMessage(), Toast.LENGTH_SHORT).show();
                 }
@@ -100,7 +100,6 @@ public class Teknisi {
                 AdapterPeminjaman adapterPeminjaman = new AdapterPeminjaman(listPeminjaman,context);
                 recyclerView.setAdapter(adapterPeminjaman);
                 adapterPeminjaman.notifyDataSetChanged();
-
             }
 
             @Override
@@ -110,8 +109,31 @@ public class Teknisi {
         });
     }
 
-    public void verifikasipeminjaman(Peminjaman peminjaman){
-        peminjaman.setStatus("Dipinjamkan");
+    public void verifikasiPeminjaman(Peminjaman peminjaman, final Context context){
+        Call<Response> call = RetrofitClient.getInstance().baseAPI().verifikasi(peminjaman.getId_pinjam(), this.username);
+
+        call.enqueue(new Callback<Response>() {
+            @Override
+            public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
+                if(response.body().getErrorRes().equals("0")){
+                    new AlertDialog.Builder(context).setTitle("Verifikasi Berhasil").setCancelable(false)
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Intent intent = new Intent(context, MenuTeknisiActivity.class );
+                                    context.startActivity(intent);
+                                    ((Activity) context).finish();
+                                }
+                            }).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Response> call, Throwable t) {
+
+            }
+        });
+
     }
 
     public void verifikasiPengembalian(Peminjaman peminjaman){

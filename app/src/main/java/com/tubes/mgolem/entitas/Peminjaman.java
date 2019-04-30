@@ -6,8 +6,8 @@ import java.util.Date;
 public class Peminjaman {
     private String id_pinjam;
     private String nim;
-    private String username_pinjam;
-    private String username_kembali;
+    private String username_verifpinjam;
+    private String username_verifkembali;
     private String nama_kegiatan;
     private Date tgl_pinjam;
     private Date tgl_kembali;
@@ -72,19 +72,19 @@ public class Peminjaman {
         this.tgl_kembali = tgl_kembali;
     }
 
-    public String getUsername_pinjam() {
-        return username_pinjam;
+    public String getUsername_verifpinjam() {
+        return username_verifpinjam;
     }
 
-    public void setUsername_pinjam(String username_pinjam) {
-        this.username_pinjam = username_pinjam;
+    public void setUsername_verifpinjam(String username_verifpinjam) {
+        this.username_verifpinjam = username_verifpinjam;
     }
 
-    public String getUsername_kembali() {
-        return username_kembali;
+    public String getUsername_verifkembali() {
+        return username_verifkembali;
     }
 
-    public void setUsername_kembali(String username_kembali) {
-        this.username_kembali = username_kembali;
+    public void setUsername_verifkembali(String username_verifkembali) {
+        this.username_verifkembali = username_verifkembali;
     }
 }

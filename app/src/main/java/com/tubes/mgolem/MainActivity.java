@@ -81,13 +81,11 @@ public class MainActivity extends AppCompatActivity {
                             Mahasiswa mhs = Mahasiswa.getInstance();
                             mhs.login(user.getUser().get(0), user.getUser().get(1), mContext);
                         }
-
                     }else{
                         Intent i = new Intent(MainActivity.this, PilihLogin.class);
                         startActivity(i);
                         finish();
                     }
-
                 }
             };
         }
