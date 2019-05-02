@@ -7,10 +7,12 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.tubes.mgolem.ActivityMahasiswa.PinjamBarangActivity;
 import com.tubes.mgolem.ActivityTeknisi.DataPengembalianActivity;
 import com.tubes.mgolem.SQLite.UserDAO;
 import com.tubes.mgolem.entitas.Mahasiswa;
@@ -19,6 +21,7 @@ public class MenuMhsActivity extends AppCompatActivity {
     Context context;
     Dialog alertDialog;
     private Button btnYa, btnTidak, btnLogout;
+    private CardView cvPinjamBarang;
     private UserDAO userDAO;
     private TextView tvNama, tvNim;
 
@@ -28,7 +31,16 @@ public class MenuMhsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_menu_mhs);
         context=MenuMhsActivity.this;
         userDAO = new UserDAO(context);
-        alertDialog = new Dialog(context);
+        alertDialog = new Dialog(context, R.style.MyDialogTheme);
+
+        cvPinjamBarang=findViewById(R.id.cvPinjam);
+        cvPinjamBarang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MenuMhsActivity.this, PinjamBarangActivity.class);
+                startActivity(intent);
+            }
+        });
 
         tvNim = findViewById(R.id.txtnim);
         tvNama= findViewById(R.id.txtnama);

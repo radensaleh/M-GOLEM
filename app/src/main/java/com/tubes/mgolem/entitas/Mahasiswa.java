@@ -81,11 +81,6 @@ public class Mahasiswa {
     }
 
     public void login(final String nim, final String password, final Context context, final ProgressDialog pd){
-        pd.setIcon(R.drawable.login);
-        pd.setTitle("Masuk");
-        pd.setMessage("Harap Menunggu. . .");
-        pd.setCancelable(false);
-        pd.show();
 
         this.nim = nim;
         this.password=password;

@@ -8,6 +8,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.Button;
@@ -43,7 +44,6 @@ public class MenuTeknisiActivity extends AppCompatActivity {
                 logout();
             }
         });
-
         Teknisi teknisi = Teknisi.getInstance();
 
         tvNama = findViewById(R.id.txtnama);

@@ -46,6 +46,10 @@
         <item name="android:windowExitAnimation">@anim/slide_down</item>
     </style>
 
+    <style name="MyDialogTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/colorYellow</item>
+    </style>
+
 </resources>
 
 

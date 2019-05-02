@@ -12,7 +12,6 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tubes.mgolem.Adapter.AdapterPeminjaman;
@@ -75,16 +74,15 @@ public class Teknisi {
                                 context.startActivity(intent);
                             }
 
-                }else if(response.body().getErrorRes().equals("1")) {
-                    Toast.makeText(context, response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                }else if(response.body().getErrorRes().equals("2")){
-                    Toast.makeText(context,response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            }
-
+                        }else if(response.body().getErrorRes().equals("1")) {
+                            Toast.makeText(context, response.body().getMessage() , Toast.LENGTH_SHORT).show();
+                        }else if(response.body().getErrorRes().equals("2")){
+                            Toast.makeText(context,response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
                     @Override
                     public void onFailure(Call<Response> call, Throwable t) {
-                        Toast.makeText(context,"Gagal", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, t.getMessage() , Toast.LENGTH_LONG).show();
                     }
                 });
             }
@@ -96,11 +94,6 @@ public class Teknisi {
     }
 
     public void login (final String username, final String password, final Context context, final ProgressDialog pd){
-        pd.setIcon(R.drawable.login);
-        pd.setTitle("Masuk");
-        pd.setMessage("Harap Menunggu. . .");
-        pd.setCancelable(false);
-        pd.show();
 
         this.username=username;
         this.password=password;
@@ -122,7 +115,7 @@ public class Teknisi {
                                 pd.dismiss();
                                 user.setUser(teknisi.getUsername(), teknisi.getPassword(), "1");
 
-                                new AlertDialog.Builder(context).setIcon(R.drawable.success).setTitle("Login Berhasil").setMessage("Selamat Datang "+response.body().getUsername()).setCancelable(false)
+                                new AlertDialog.Builder(context).setIcon(R.drawable.success).setTitle("Login berhasil").setMessage("Selamat datang "+response.body().getUsername()).setCancelable(false)
                                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
@@ -172,20 +165,14 @@ public class Teknisi {
 
     }
 
-    public void lihatPeminjaman(final String status, final Context context, final RecyclerView recyclerView, final ProgressBar pb, final TextView tvKosong){
-        pb.setVisibility(View.VISIBLE);
-        tvKosong.setVisibility(View.INVISIBLE);
+    public void lihatPeminjaman(String status, final Context context, final RecyclerView recyclerView){
+        Call<List<Peminjaman>> call = RetrofitClient.getInstance().baseAPI().getPeminjaman(status);
 
-        Runnable rn = new Runnable() {
+        call.enqueue(new Callback<List<Peminjaman>>() {
             @Override
-            public void run() {
-                Call<List<Peminjaman>> call = RetrofitClient.getInstance().baseAPI().getPeminjaman(status);
-                call.enqueue(new Callback<List<Peminjaman>>() {
-                    @Override
-                    public void onResponse(Call<List<Peminjaman>> call, retrofit2.Response<List<Peminjaman>> response) {
-                       if(response.body().size() != 0){
-                           pb.setVisibility(View.GONE);
-                           List<Peminjaman> listPeminjaman = response.body();
+            public void onResponse(Call<List<Peminjaman>> call, retrofit2.Response<List<Peminjaman>> response) {
+                List<Peminjaman> listPeminjaman = response.body();
+
 
 //                if(listPeminjaman==null) {
 //                    Toast.makeText(context, "data null", Toast.LENGTH_SHORT).show();
@@ -193,28 +180,17 @@ public class Teknisi {
 //                    Toast.makeText(context, "sukses", Toast.LENGTH_SHORT).show();
 //                }
 
-                           AdapterPeminjaman adapterPeminjaman = new AdapterPeminjaman(listPeminjaman,context);
-                           recyclerView.setAdapter(adapterPeminjaman);
-                           adapterPeminjaman.notifyDataSetChanged();
-                       }else{
-                           pb.setVisibility(View.GONE);
-                           tvKosong.setVisibility(View.VISIBLE);
-                       }
+                AdapterPeminjaman adapterPeminjaman = new AdapterPeminjaman(listPeminjaman,context);
+                recyclerView.setAdapter(adapterPeminjaman);
+                adapterPeminjaman.notifyDataSetChanged();
 
-                    }
-
-                    @Override
-                    public void onFailure(Call<List<Peminjaman>> call, Throwable t) {
-                        Toast.makeText(context, "Gagal" , Toast.LENGTH_SHORT).show();
-                    }
-                });
             }
-        };
 
-        Handler handler = new Handler();
-        handler.postDelayed(rn, 2000);
-
-
+            @Override
+            public void onFailure(Call<List<Peminjaman>> call, Throwable t) {
+                Toast.makeText(context, "Gagal" , Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     public void verifikasiPeminjaman(Peminjaman peminjaman, final Context context){

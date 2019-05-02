@@ -12,8 +12,7 @@ public class Peminjaman {
     private Date tgl_pinjam;
     private Date tgl_kembali;
     private String status;
-    //private ArrayList<Barang> barangList = new ArrayList<>();
-
+    private ArrayList<Barang> barangList = new ArrayList<>();
 
 
     public void setStatus(String status){

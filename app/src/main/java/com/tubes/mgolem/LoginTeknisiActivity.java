@@ -11,17 +11,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
-import android.widget.Toast;
 
-import com.github.ybq.android.spinkit.sprite.Sprite;
-import com.github.ybq.android.spinkit.style.CubeGrid;
-import com.tubes.mgolem.Rest.Response;
-import com.tubes.mgolem.Rest.RetrofitClient;
 import com.tubes.mgolem.entitas.Teknisi;
 
-import retrofit2.Call;
-import retrofit2.Callback;
 
 public class LoginTeknisiActivity extends AppCompatActivity {
     private Dialog alertDialog;
@@ -59,7 +51,7 @@ public class LoginTeknisiActivity extends AppCompatActivity {
                     etPass.setError("Minimal 8 karakter");
                 }else{
                     Teknisi teknisi = Teknisi.getInstance();
-                    teknisi.login(username, pass, context, pd);
+                    teknisi.login(username, pass, context);
                 }
             }
         });

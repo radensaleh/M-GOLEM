@@ -44,16 +44,16 @@ public class DataPengembalianActivity extends AppCompatActivity {
 
         if(menu.equals("VerifPengembalian")){
             setTitle("Verifikasi Pengembalian");
-            teknisi.lihatPeminjaman("3", this, recyclerView, pb, tvKosong);
+            teknisi.lihatPeminjaman("3", this, recyclerView);
         }else if(menu.equals("VerifPeminjaman")){
             setTitle("Verifikasi Peminjaman");
-            teknisi.lihatPeminjaman("1", this ,recyclerView, pb, tvKosong);
+            teknisi.lihatPeminjaman("1", this ,recyclerView);
         }else if(menu.equals("DataPeminjaman")){
             setTitle("Data Peminjaman");
-            teknisi.lihatPeminjaman("2", this, recyclerView, pb, tvKosong);
+            teknisi.lihatPeminjaman("2", this, recyclerView);
         }else{
             setTitle("Data Pengembalian");
-            teknisi.lihatPeminjaman("0", this, recyclerView, pb, tvKosong);
+            teknisi.lihatPeminjaman("0", this, recyclerView);
         }
 
 

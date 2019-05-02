@@ -102,7 +102,7 @@ public class AdapterPeminjaman extends RecyclerView.Adapter<AdapterPeminjaman.My
 
         //show data mahasiswa
 
-        myViewHolder.tvNim.setOnClickListener(new View.OnClickListener() {
+        myViewHolder.btnDataMhs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Call<MahasiswaAPI> call = RetrofitClient.getInstance().baseAPI().getMahasiswa(peminjamanList.get(i).getNim());
@@ -140,7 +140,7 @@ public class AdapterPeminjaman extends RecyclerView.Adapter<AdapterPeminjaman.My
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView tvIdPeminjaman, tvNim, tvUserTeknisiPinjam, tvUserTeknisiKembali, tvTanggalPinjam, tvTanggalKembali, tvKegiatan;
         LinearLayout layoutTeknisiPinjam, layoutTeknisiKembali, layoutTanggalPinjam, layoutTanggalKembali;
-        Button btnVerif;
+        Button btnVerif, btnDataMhs, btnInfoBarang;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -158,6 +158,9 @@ public class AdapterPeminjaman extends RecyclerView.Adapter<AdapterPeminjaman.My
             layoutTanggalKembali=itemView.findViewById(R.id.layoutTanggalKembali);
 
             btnVerif=itemView.findViewById(R.id.btnVerifikasi);
+            btnDataMhs=itemView.findViewById(R.id.btnDataSiswa);
+            btnInfoBarang=itemView.findViewById(R.id.btnInfoBarang);
+
         }
     }
 }
