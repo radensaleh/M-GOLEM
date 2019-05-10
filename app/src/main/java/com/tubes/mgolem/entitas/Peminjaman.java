@@ -1,17 +1,24 @@
 package com.tubes.mgolem.entitas;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 import java.util.Date;
 
 public class Peminjaman {
     private String id_pinjam;
+    //@SerializedName("nim")
     private String nim;
     private String username_verifpinjam;
     private String username_verifkembali;
+    //@SerializedName("nama_kegiatan")
     private String nama_kegiatan;
+    //@SerializedName("tgl_pinjam")
     private Date tgl_pinjam;
     private Date tgl_kembali;
+    //@SerializedName("tgl_kembali")
     private String status;
+    //@SerializedName("barangList")
     private ArrayList<Barang> barangList = new ArrayList<>();
 
 
@@ -39,13 +46,13 @@ public class Peminjaman {
         this.nim = nim;
     }
 
-//    public String getUsername() {
-//        return username;
-//    }
-//
-//    public void setUsername(String username) {
-//        this.username = username;
-//    }
+    public ArrayList<Barang> getBarangList() {
+        return barangList;
+    }
+
+    public void setBarangList(ArrayList<Barang> barangList) {
+        this.barangList = barangList;
+    }
 
     public String getNama_kegiatan() {
         return nama_kegiatan;

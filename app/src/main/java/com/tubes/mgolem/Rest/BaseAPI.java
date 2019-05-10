@@ -2,11 +2,15 @@ package com.tubes.mgolem.Rest;
 
 import com.tubes.mgolem.Api.KelasAPI;
 import com.tubes.mgolem.Api.MahasiswaAPI;
+import com.tubes.mgolem.entitas.Barang;
 import com.tubes.mgolem.entitas.Peminjaman;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -55,7 +59,32 @@ public interface BaseAPI {
             @Query("username") String username
     );
 
+    @GET("pengembalianPinjam")
+    Call<Response> pengembalianPinjam(
+            @Query("id_pinjam") String id_pinjam
+    );
+
+    @GET("getDaftarBarang")
+    Call<List<Barang>> getDaftarBarang(
+            @Query("id_pinjam") String id_pinjam
+    );
+
     @GET("kelas")
     Call<List<KelasAPI>> kelas();
 
+    @GET("barang")
+    Call<Barang> getBarang(
+        @Query("id") String id_barang
+    );
+
+    @FormUrlEncoded
+    @POST("pinjamBarang")
+    Call<Response> pinjamBarang(
+            @Field("nim") String nim,
+            @Field("nama_kegiatan") String nama_kegiatan,
+            @Field("tgl_pinjam")String tgl_pinjam,
+            @Field("tgl_kembali") String tgl_kembali,
+            @Field("id_barang[]") String[] id_barang,
+            @Field("kuantitas[]") Integer[] kuantitas
+            );
 }

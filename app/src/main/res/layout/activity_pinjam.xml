@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-
     android:layout_height="match_parent"
-    tools:context=".ActivityMahasiswa.PinjamBarangActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".ActivityMahasiswa.PinjamActivity">
 
     <LinearLayout
-        android:id="@+id/linear"
+        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -151,27 +150,17 @@
                         android:text="Tambah barang"
                         android:layout_margin="10dp"
                         android:background="@drawable/btn_shape" />
-
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/rvBarang"
-                        android:scrollbars="vertical"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"/>
                 </LinearLayout>
 
-                <Button
-                    android:id="@+id/btnPostPeminjaman"
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rvBarang"
+                    android:scrollbars="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:text="PINJAM BARANG"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/btn_shape" />
-
+                    android:layout_height="match_parent"/>
 
             </LinearLayout>
 
         </android.support.v4.widget.NestedScrollView>
     </LinearLayout>
-</android.support.v7.widget.CardView>
+
+</LinearLayout>

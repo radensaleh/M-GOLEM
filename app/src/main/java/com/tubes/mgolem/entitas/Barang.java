@@ -2,10 +2,10 @@ package com.tubes.mgolem.entitas;
 
 public class Barang {
     private String id_barang;
-    private String id_kategori;
-    private String id_tipe;
-    private String id_merk;
-
+    private String kategori;
+    private String tipe;
+    private String merk;
+    private int kuantitas;
 
     public String getId_barang() {
         return id_barang;
@@ -15,27 +15,35 @@ public class Barang {
         this.id_barang = id_barang;
     }
 
-    public String getId_kategori() {
-        return id_kategori;
+    public String getKategori() {
+        return kategori;
     }
 
-    public void setId_kategori(String id_kategori) {
-        this.id_kategori = id_kategori;
+    public void setKategori(String kategori) {
+        this.kategori = kategori;
     }
 
-    public String getId_tipe() {
-        return id_tipe;
+    public String getTipe() {
+        return tipe;
     }
 
-    public void setId_tipe(String id_tipe) {
-        this.id_tipe = id_tipe;
+    public void setTipe(String tipe) {
+        this.tipe = tipe;
     }
 
-    public String getId_merk() {
-        return id_merk;
+    public String getMerk() {
+        return merk;
     }
 
-    public void setId_merk(String id_merk) {
-        this.id_merk = id_merk;
+    public int getKuantitas() {
+        return kuantitas;
+    }
+
+    public void setKuantitas(int kuantitas) {
+        this.kuantitas = kuantitas;
+    }
+
+    public void setMerk(String merk) {
+        this.merk = merk;
     }
 }

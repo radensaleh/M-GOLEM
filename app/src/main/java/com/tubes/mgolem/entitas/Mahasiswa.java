@@ -1,5 +1,6 @@
 package com.tubes.mgolem.entitas;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -27,8 +28,7 @@ public class Mahasiswa {
     private String nama;
     private String kelas;
     private String password;
-    private ArrayList<Peminjaman> peminjamanList;
-    private ArrayList<Barang> listBarang;
+    private Peminjaman peminjaman;
 
     public static Mahasiswa getInstance(){
         if(mhs==null){
@@ -153,6 +153,28 @@ public class Mahasiswa {
 
     }
 
+    public void pengembalianPinjam(String id_pinjam, final Context context){
+        Call<Response> call = RetrofitClient.getInstance().baseAPI().pengembalianPinjam(id_pinjam);
+        call.enqueue(new Callback<Response>() {
+            @Override
+            public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
+                new AlertDialog.Builder(context).setTitle("Info").setMessage("Pengembalian berhasil").setCancelable(false)
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                ((Activity) context).finish();
+                            }
+                        }).show();
+            }
+
+            @Override
+            public void onFailure(Call<Response> call, Throwable t) {
+
+            }
+        });
+
+    }
+
     public void registrasi(String nama, String nim, String password, String kelas, final Context context){
         Mahasiswa mhs = Mahasiswa.getInstance();
         mhs.setNim(nim);
@@ -197,9 +219,16 @@ public class Mahasiswa {
         });
     }
 
-    public void pinjamBarang(){
-        Peminjaman peminjaman = new Peminjaman();
-        peminjamanList.add(peminjaman);
+    public void pinjamBarang(Peminjaman peminjaman){
+        this.peminjaman=peminjaman;
+    }
+
+    public Peminjaman getPeminjaman() {
+        return peminjaman;
+    }
+
+    public void tambahBarang(Barang barang){
+        peminjaman.getBarangList().add(barang);
     }
 
     public void ubahPassword(String password){

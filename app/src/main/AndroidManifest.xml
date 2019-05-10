@@ -13,7 +13,11 @@
         android:supportsRtl="true"
         android:theme="@style/NoBarAppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ActivityMahasiswa.FormPinjamBarangActivity"></activity>
+        <activity android:name=".ActivityMahasiswa.PengembalianBarangActivity"></activity>
+        <activity android:name=".ActivityMahasiswa.TambahBarangActivity" />
+        <activity android:name=".ActivityMahasiswa.DataBarangActivity" />
+        <activity android:name=".ActivityMahasiswa.ScanQRActivity" />
+        <activity android:name=".ActivityMahasiswa.FormPinjamBarangActivity" />
         <activity android:name=".ActivityMahasiswa.PinjamBarangActivity" />
         <activity
             android:name=".ActivityTeknisi.DataPengembalianActivity"
