@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.tubes.mgolem.Api.MahasiswaAPI;
 import com.tubes.mgolem.MenuTeknisiActivity;
@@ -48,7 +49,7 @@ public class AdapterPeminjaman extends RecyclerView.Adapter<AdapterPeminjaman.My
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AdapterPeminjaman.MyViewHolder myViewHolder, final int i) {
+    public void onBindViewHolder(@NonNull final AdapterPeminjaman.MyViewHolder myViewHolder, final int i) {
         Date date = peminjamanList.get(i).getTgl_pinjam();
         String tglpinjam = new SimpleDateFormat("dd-MM-yyyy").format(date);
         Date dateKembali = peminjamanList.get(i).getTgl_pinjam();
@@ -128,6 +129,41 @@ public class AdapterPeminjaman extends RecyclerView.Adapter<AdapterPeminjaman.My
                     }
                 });
 
+            }
+        });
+
+        myViewHolder.btnInfoBarang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Call<List<Barang>> call = RetrofitClient.getInstance().baseAPI().getDaftarBarang(peminjamanList.get(i).getId_pinjam());
+                call.enqueue(new Callback<List<Barang>>() {
+                    @Override
+                    public void onResponse(Call<List<Barang>> call, Response<List<Barang>> response) {
+                        StringBuffer data = new StringBuffer();
+                        for(int i=0;i<response.body().size();i++){
+                            data.append("ID Barang : "+response.body().get(i).getId_barang()+"\n");
+                            data.append("Tipe : "+response.body().get(i).getTipe()+"\n");
+                            data.append("Merk : "+response.body().get(i).getMerk()+"\n");
+                            if(i==response.body().size()-1){
+                                data.append("Kuantitas : "+response.body().get(i).getKuantitas());
+                            }else{
+                                data.append("Kuantitas : "+response.body().get(i).getKuantitas()+"\n\n");
+                            }
+                        }
+
+                        new AlertDialog.Builder(context).setTitle("Daftar Barang").setMessage(data).setCancelable(false)
+                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                    }
+                                }).show();
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<Barang>> call, Throwable t) {
+                        Toast.makeText(context,"gagal", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
     }

@@ -224,8 +224,32 @@ public class Teknisi {
         peminjaman.setStatus("Dikembalikan");
     }
 
-    public void ubahPassword(String password){
-        this.password = password;
+    public void ubahPassword(final String password, final Context context){
+        Call<Response> call = RetrofitClient.getInstance().baseAPI().ubahPasswordTeknisi(this.username, password);
+        call.enqueue(new Callback<Response>() {
+            @Override
+            public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
+
+                if (response.body().getErrorRes().equals("0")) {
+                    Teknisi teknisi = Teknisi.getInstance();
+                    teknisi.setPassword(password);
+                    UserDAO userDAO = new UserDAO(context);
+                    userDAO.ubahPassword(password);
+                    new AlertDialog.Builder(context).setTitle("Info").setMessage(response.body().getMessage()).setCancelable(false)
+                            .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    ((Activity) context).finish();
+                                }
+                            }).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Response> call, Throwable t) {
+                Toast.makeText(context, "Gagal", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     public String getNama() {
@@ -246,5 +270,9 @@ public class Teknisi {
 
     public String getPassword() {
         return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

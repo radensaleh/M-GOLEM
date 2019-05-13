@@ -43,8 +43,29 @@ public interface BaseAPI {
             @Field("id_kelas") String id_kelas
     );
 
+    @FormUrlEncoded
+    @POST("ubahPassword")
+    Call<Response> ubahPassword(
+            @Field("nim") String nim,
+            @Field("password") String password
+    );
+
+    @FormUrlEncoded
+    @POST("ubahPasswordTeknisi")
+    Call<Response> ubahPasswordTeknisi(
+            @Field("username") String username,
+            @Field("password") String password
+    );
+
+
     @GET("getPeminjaman")
     Call<List<Peminjaman>> getPeminjaman(
+            @Query("status") String status
+    );
+
+    @GET("getPeminjamanMhs")
+    Call<List<Peminjaman>> getPeminjamanMhs(
+            @Query("nim") String nim,
             @Query("status") String status
     );
 

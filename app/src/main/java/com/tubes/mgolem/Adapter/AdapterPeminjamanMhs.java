@@ -1,6 +1,5 @@
 package com.tubes.mgolem.Adapter;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -28,24 +27,24 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AdapterPengembalian extends RecyclerView.Adapter<AdapterPengembalian.MyViewHolder> {
+public class AdapterPeminjamanMhs extends RecyclerView.Adapter<AdapterPeminjamanMhs.MyViewHolder> {
     private List<Peminjaman> peminjamanList;
     private Context context;
 
-    public AdapterPengembalian(List<Peminjaman> peminjamanList, Context context){
+    public AdapterPeminjamanMhs(List<Peminjaman> peminjamanList, Context context){
         this.peminjamanList = peminjamanList;
         this.context = context;
     }
 
     @NonNull
     @Override
-    public AdapterPengembalian.MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public AdapterPeminjamanMhs.MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.data_peminjaman, viewGroup, false);
         return new MyViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AdapterPengembalian.MyViewHolder myViewHolder, final int i) {
+    public void onBindViewHolder(@NonNull AdapterPeminjamanMhs.MyViewHolder myViewHolder, final int i) {
         Date date = peminjamanList.get(i).getTgl_pinjam();
         String tglpinjam = new SimpleDateFormat("dd-MM-yyyy").format(date);
         Date dateKembali = peminjamanList.get(i).getTgl_pinjam();
@@ -56,8 +55,36 @@ public class AdapterPengembalian extends RecyclerView.Adapter<AdapterPengembalia
         myViewHolder.tvTanggalPinjam.setText(tglpinjam);
         myViewHolder.tvTanggalKembali.setText(tglKembali);
         myViewHolder.tvKegiatan.setText(peminjamanList.get(i).getNama_kegiatan());
-        myViewHolder.btnVerif.setText("Pengembalian Peminjaman");
-        myViewHolder.layoutTeknisiKembali.setVisibility(View.GONE);
+
+
+        if(peminjamanList.get(i).getStatus().equals("1")){
+            myViewHolder.layoutTeknisiPinjam.setVisibility(View.GONE);
+            myViewHolder.btnVerif.setText("Menunggu verifikasi peminjaman");
+            myViewHolder.btnVerif.setEnabled(false);
+            myViewHolder.btnDataMhs.setVisibility(View.GONE);
+            myViewHolder.layoutTeknisiKembali.setVisibility(View.GONE);
+        }else if(peminjamanList.get(i).getStatus().equals("3")){
+            myViewHolder.tvUserTeknisiPinjam.setText(peminjamanList.get(i).getUsername_verifpinjam());
+            myViewHolder.btnDataMhs.setVisibility(View.GONE);
+            myViewHolder.btnVerif.setText("Menunggu verifikasi pengembalian");
+            myViewHolder.btnVerif.setEnabled(false);
+            myViewHolder.layoutTeknisiKembali.setVisibility(View.GONE);
+        }else if(peminjamanList.get(i).getStatus().equals("2")){
+            myViewHolder.btnVerif.setText("Kembalikan Peminjaman");
+            myViewHolder.layoutTeknisiKembali.setVisibility(View.GONE);
+            myViewHolder.btnDataMhs.setVisibility(View.GONE);
+            myViewHolder.tvUserTeknisiPinjam.setText(peminjamanList.get(i).getUsername_verifpinjam());
+            myViewHolder.btnVerif.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Mahasiswa mhs = Mahasiswa.getInstance();
+                    mhs.pengembalianPinjam(peminjamanList.get(i).getId_pinjam(), context);
+                }
+            });
+        }else{
+            myViewHolder.tvUserTeknisiKembali.setText(peminjamanList.get(i).getUsername_verifkembali());
+            myViewHolder.tvUserTeknisiPinjam.setText(peminjamanList.get(i).getUsername_verifpinjam());
+        }
 
         myViewHolder.btnInfoBarang.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,13 +122,7 @@ public class AdapterPengembalian extends RecyclerView.Adapter<AdapterPengembalia
             }
         });
 
-        myViewHolder.btnVerif.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Mahasiswa mhs = Mahasiswa.getInstance();
-                mhs.pengembalianPinjam(peminjamanList.get(i).getId_pinjam(), context);
-            }
-        });
+
     }
 
     @Override

@@ -26,6 +26,9 @@ import retrofit2.Response;
 
 public class ScanQRActivity extends AppCompatActivity implements ZXingScannerView.ResultHandler {
     private ZXingScannerView mScannerView;
+    private AlertDialog.Builder dialog;
+    private LayoutInflater inflater;
+    private View dialogView;
 
 
     @Override
@@ -57,25 +60,7 @@ public class ScanQRActivity extends AppCompatActivity implements ZXingScannerVie
 
         mScannerView.stopCamera();
         setContentView(R.layout.activity_scan_qr);
-        final android.support.v7.app.AlertDialog.Builder dialog;
-        LayoutInflater inflater;
-        View dialogView;
 
-        dialog = new AlertDialog.Builder(this);
-        inflater = getLayoutInflater();
-        dialogView=inflater.inflate(R.layout.activity_data_barang, null);
-        dialog.setView(dialogView);
-        dialog.setCancelable(true);
-        dialog.setTitle("Data Barang");
-
-        final TextView tvIdBarang, tvTipe, tvKategori, tvMerk;
-        final EditText etKuantitas;
-
-        tvIdBarang=dialogView.findViewById(R.id.tvIdBarang);
-        tvKategori=dialogView.findViewById(R.id.tvKategoriBarang);
-        tvMerk=dialogView.findViewById(R.id.tvMerkBarang);
-        tvTipe=dialogView.findViewById(R.id.tvTipe);
-        etKuantitas=dialogView.findViewById(R.id.etKuantitas);
 
         Mahasiswa mhs = Mahasiswa.getInstance();
         boolean eq =false;
@@ -85,7 +70,6 @@ public class ScanQRActivity extends AppCompatActivity implements ZXingScannerVie
                 break;
             }
         }
-
         if(eq){
             new android.app.AlertDialog.Builder(ScanQRActivity.this)
                     .setTitle("Gagal")
@@ -102,6 +86,20 @@ public class ScanQRActivity extends AppCompatActivity implements ZXingScannerVie
             call.enqueue(new Callback<Barang>() {
                 @Override
                 public void onResponse(Call<Barang> call, final Response<Barang> response) {
+                    dialog = new AlertDialog.Builder(ScanQRActivity.this);
+                    inflater = getLayoutInflater();
+                    dialogView=inflater.inflate(R.layout.activity_data_barang, null);
+                    dialog.setView(dialogView);
+                    dialog.setTitle("Data Barang");
+
+                    final TextView tvIdBarang, tvTipe, tvKategori, tvMerk;
+                    final EditText etKuantitas;
+
+                    tvIdBarang=dialogView.findViewById(R.id.tvIdBarang);
+                    tvKategori=dialogView.findViewById(R.id.tvKategoriBarang);
+                    tvMerk=dialogView.findViewById(R.id.tvMerkBarang);
+                    tvTipe=dialogView.findViewById(R.id.tvTipe);
+                    etKuantitas=dialogView.findViewById(R.id.etKuantitas);
                     if (response.body().getTipe() != null) {
                         tvIdBarang.setText(rawResult.getText());
                         tvTipe.setText(response.body().getTipe());
@@ -111,19 +109,7 @@ public class ScanQRActivity extends AppCompatActivity implements ZXingScannerVie
                         dialog.setPositiveButton("Tambah", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                Mahasiswa mhs = Mahasiswa.getInstance();
-                                Barang barang = new Barang();
-                                String kuantitas = etKuantitas.getText().toString();
-                                if (kuantitas.isEmpty()) {
-                                    etKuantitas.setError("Kuantitas tidak boleh kosong");
-                                }
-                                barang.setKuantitas(Integer.parseInt(kuantitas));
-                                barang.setId_barang(rawResult.getText());
-                                barang.setKategori(response.body().getKategori());
-                                barang.setTipe(response.body().getTipe());
-                                barang.setMerk(response.body().getTipe());
-                                mhs.tambahBarang(barang);
-                                finish();
+
                             }
                         });
 
@@ -133,7 +119,29 @@ public class ScanQRActivity extends AppCompatActivity implements ZXingScannerVie
                                 finish();
                             }
                         });
-                        dialog.show();
+                        AlertDialog alertDialog = dialog.create();
+                        alertDialog.show();
+
+                        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Mahasiswa mhs = Mahasiswa.getInstance();
+                                Barang barang = new Barang();
+                                String kuantitas = etKuantitas.getText().toString();
+                                if (kuantitas.isEmpty()) {
+                                    etKuantitas.setError("Kuantitas tidak boleh kosong");
+                                }else{
+                                    barang.setKuantitas(Integer.parseInt(kuantitas));
+                                    barang.setId_barang(rawResult.getText());
+                                    barang.setKategori(response.body().getKategori());
+                                    barang.setTipe(response.body().getTipe());
+                                    barang.setMerk(response.body().getTipe());
+                                    mhs.tambahBarang(barang);
+                                    finish();
+                                }
+                            }
+                        });
+
                     } else {
 
                     }

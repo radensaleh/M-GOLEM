@@ -40,6 +40,12 @@ public class UserDAO extends DBHelper {
         db.execSQL(sql);
     }
 
+    public void ubahPassword(String password){
+        String sql="UPDATE pengguna SET password='"+password+"' where id='1' ";
+        SQLiteDatabase db = this.getReadableDatabase();
+        db.execSQL(sql);
+    }
+
     public void deleteUser(){
         String sql="DELETE FROM pengguna WHERE id='1'";
         SQLiteDatabase db = this.getReadableDatabase();

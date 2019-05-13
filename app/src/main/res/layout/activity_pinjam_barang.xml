@@ -46,7 +46,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="15dp"
-                            android:text=" "/>
+                            android:text=" "
+                            android:textColor="#000"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -84,6 +85,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="15dp"
+                            android:textColor="#000"
                             android:text=" "/>
                     </LinearLayout>
 
@@ -103,7 +105,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="15sp"
-                            android:text=" "/>
+                            android:text=" "
+                            android:textColor="#000"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -122,7 +125,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="15sp"
-                            android:text=" "/>
+                            android:text=" "
+                            android:textColor="#000"/>
                     </LinearLayout>
 
                     <LinearLayout
