@@ -41,7 +41,7 @@ public class MenuMhsActivity extends AppCompatActivity {
             }
         });
 
-        alertDialog = new Dialog(context, R.style.MyDialogTheme);
+        alertDialog = new Dialog(this);
 
         cvPinjamBarang=findViewById(R.id.cvPinjam);
         cvPinjamBarang.setOnClickListener(new View.OnClickListener() {
@@ -67,8 +67,8 @@ public class MenuMhsActivity extends AppCompatActivity {
             }
         });
 
-
     }
+
     public void logout(){
         alertDialog.setContentView(R.layout.alert_keluar);
         btnTidak = alertDialog.findViewById(R.id.btnTidak);

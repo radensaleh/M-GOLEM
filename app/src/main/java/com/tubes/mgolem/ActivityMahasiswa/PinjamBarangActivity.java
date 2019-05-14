@@ -105,6 +105,8 @@ public class PinjamBarangActivity extends AppCompatActivity {
         dialogView = inflater.inflate(R.layout.activity_form_pinjam_barang, null);
         dialog.setView(dialogView);
         dialog.setTitle("Form Pinjam Barang");
+        dialog.setCancelable(false);
+        dialog.setIcon(R.drawable.pinjam);
 
             btnTglPinjam=dialogView.findViewById(R.id.btnTanggalPinjam);
             btnTglKembali=dialogView.findViewById(R.id.btnTanggalKembali);

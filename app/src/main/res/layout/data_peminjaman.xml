@@ -202,7 +202,7 @@
                 android:layout_marginRight="5dp"
                 android:textSize="13dp"
                 android:text="Data Mahasiswa"
-                android:textColor="@color/colorAccent"
+                android:textColor="@color/colorWhite"
                 android:background="@drawable/btn_shape"
                 android:layout_height="wrap_content" />
 
@@ -214,7 +214,7 @@
                 android:layout_weight="1"
                 android:textSize="13dp"
                 android:text="Data Barang"
-                android:textColor="@color/colorAccent"
+                android:textColor="@color/colorWhite"
                 android:background="@drawable/btn_shape"
                 android:layout_height="wrap_content" />
 
@@ -226,7 +226,7 @@
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:text="Verifikasi Pengembalian"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/colorWhite"
             android:background="@drawable/btn_shape"
             android:layout_height="match_parent" />
 

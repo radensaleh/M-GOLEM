@@ -29,7 +29,7 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorYellow</item>
         <item name="colorPrimaryDark">@color/colorYellowDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorAccent">@color/colorWhite</item>
     </style>
 
     <!-- No Action Bar -->
