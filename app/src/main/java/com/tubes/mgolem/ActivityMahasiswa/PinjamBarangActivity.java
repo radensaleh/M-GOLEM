@@ -217,68 +217,62 @@ public class PinjamBarangActivity extends AppCompatActivity {
         btnPostBarang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Date datePinjam = mhs.getPeminjaman().getTgl_pinjam();
-                String tglpinjam = new SimpleDateFormat("yyyy/MM/dd").format(datePinjam);
-                Date dateKembali = mhs.getPeminjaman().getTgl_kembali();
-                String tglKembali = new SimpleDateFormat("yyyy/MM/dd").format(dateKembali);
+                if(mhs.getPeminjaman().getBarangList().size()==0){
+                    new android.app.AlertDialog.Builder(PinjamBarangActivity.this).setTitle("Gagal").setMessage("Data barang belum ditambahkan").setCancelable(false)
+                            .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                }
+                            }).show();
+                }else{
+                    Date datePinjam = mhs.getPeminjaman().getTgl_pinjam();
+                    String tglpinjam = new SimpleDateFormat("yyyy/MM/dd").format(datePinjam);
+                    Date dateKembali = mhs.getPeminjaman().getTgl_kembali();
+                    String tglKembali = new SimpleDateFormat("yyyy/MM/dd").format(dateKembali);
 
+                    int n = mhs.getPeminjaman().getBarangList().size();
+                    final String[] id_barang = new String[n];
+                    Integer[] kuantitas = new Integer[n];
 
-//                final List<String> id_barang= new ArrayList<>();
-//                List<Integer> kuantitas = new ArrayList<>();
+                    for(int i=0;i<mhs.getPeminjaman().getBarangList().size();i++){
+                        id_barang[i]=mhs.getPeminjaman().getBarangList().get(i).getId_barang();
 
-                int n = mhs.getPeminjaman().getBarangList().size();
-                final String[] id_barang = new String[n];
-                Integer[] kuantitas = new Integer[n];
+                        kuantitas[i]=(mhs.getPeminjaman().getBarangList().get(i).getKuantitas());
+                    }
 
-                for(int i=0;i<mhs.getPeminjaman().getBarangList().size();i++){
-                    id_barang[i]=mhs.getPeminjaman().getBarangList().get(i).getId_barang();
+                    Call<Response> call = RetrofitClient.getInstance().baseAPI().pinjamBarang(mhs.getNim(),
+                            mhs.getPeminjaman().getNama_kegiatan(), tglpinjam , tglKembali, id_barang, kuantitas);
 
-                    kuantitas[i]=(mhs.getPeminjaman().getBarangList().get(i).getKuantitas());
+                    call.enqueue(new Callback<Response>() {
+                        @Override
+                        public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
+                            new android.app.AlertDialog.Builder(PinjamBarangActivity.this).setTitle("Info").setMessage("Peminjaman berhasil").setCancelable(false)
+                                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            finish();
+                                        }
+                                    }).show();
+                        }
+
+                        @Override
+                        public void onFailure(Call<Response> call, Throwable t) {
+                            new android.app.AlertDialog.Builder(PinjamBarangActivity.this).setTitle("Info").setMessage("Peminjaman barang gagal").setCancelable(false)
+                                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+
+                                        }
+                                    }).show();
+                        }
+                    });
                 }
 
-                Call<Response> call = RetrofitClient.getInstance().baseAPI().pinjamBarang(mhs.getNim(),
-                        mhs.getPeminjaman().getNama_kegiatan(), tglpinjam , tglKembali, id_barang, kuantitas);
-
-                call.enqueue(new Callback<Response>() {
-                    @Override
-                    public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
-                        new android.app.AlertDialog.Builder(PinjamBarangActivity.this).setTitle("Info").setMessage("Peminjaman berhasil").setCancelable(false)
-                                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        finish();
-                                    }
-                                }).show();
-                    }
-
-                    @Override
-                    public void onFailure(Call<Response> call, Throwable t) {
-                        new android.app.AlertDialog.Builder(PinjamBarangActivity.this).setTitle("Info").setMessage("Peminjaman barang gagal").setCancelable(false)
-                                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-
-                                    }
-                                }).show();
-                    }
-                });
-
-//
             }
         });
 
     }
 
-    private void canCloseDialog(DialogInterface dialogInterface, boolean close) {
-        try {
-            Field field = dialogInterface.getClass().getSuperclass().getDeclaredField("mShowing");
-
-            field.setAccessible(true);
-            field.set(dialogInterface, close);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     @Override
     public void onBackPressed(){

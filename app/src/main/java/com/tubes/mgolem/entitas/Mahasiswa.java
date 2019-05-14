@@ -68,7 +68,7 @@ public class Mahasiswa {
                         context.startActivity(intent);
                     }
                 }else if(response.body().getErrorRes().equals("1")){
-                    Toast.makeText(context, response.body().getMessageRes().getNim()[0], Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, response.body().getMessage(), Toast.LENGTH_SHORT).show();
                 }else{
                     Toast.makeText(context,response.body().getMessage(), Toast.LENGTH_SHORT).show();
                 }
@@ -194,7 +194,7 @@ public class Mahasiswa {
                     UserDAO userDAO = new UserDAO(context);
                     if(userDAO.getUser()==null){
                         userDAO.setUser(mhs.getNim(), mhs.getPassword(), "2");
-                        new AlertDialog.Builder(context).setTitle("Registrasi Berhasil").setMessage("Selamat Datang "+response.body().getNama()).setCancelable(false)
+                        new AlertDialog.Builder(context).setTitle("Registrasi Berhasil").setMessage("Selamat Datang "+mhs.getNama()).setCancelable(false)
                                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
@@ -267,13 +267,6 @@ public class Mahasiswa {
             @Override
             public void onResponse(Call<List<Peminjaman>> call, retrofit2.Response<List<Peminjaman>> response) {
                 List<Peminjaman> listPeminjaman = response.body();
-
-
-//                if(listPeminjaman==null) {
-//                    Toast.makeText(context, "data null", Toast.LENGTH_SHORT).show();
-//                }else{
-//                    Toast.makeText(context, "sukses", Toast.LENGTH_SHORT).show();
-//                }
 
                 AdapterPeminjamanMhs adapterPeminjaman = new AdapterPeminjamanMhs(listPeminjaman,context);
                 recyclerView.setAdapter(adapterPeminjaman);

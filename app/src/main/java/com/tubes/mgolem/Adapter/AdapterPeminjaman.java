@@ -3,7 +3,6 @@ package com.tubes.mgolem.Adapter;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,7 +14,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tubes.mgolem.Api.MahasiswaAPI;
-import com.tubes.mgolem.MenuTeknisiActivity;
 import com.tubes.mgolem.R;
 import com.tubes.mgolem.Rest.RetrofitClient;
 import com.tubes.mgolem.entitas.Barang;
@@ -23,10 +21,8 @@ import com.tubes.mgolem.entitas.Peminjaman;
 import com.tubes.mgolem.entitas.Teknisi;
 
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -63,42 +59,48 @@ public class AdapterPeminjaman extends RecyclerView.Adapter<AdapterPeminjaman.My
 
         String status=peminjamanList.get(i).getStatus();
 
-        if(status.equals("1")){
-            //Verifikasi Peminjaman
-            myViewHolder.layoutTeknisiPinjam.setVisibility(View.GONE);
-            myViewHolder.layoutTeknisiKembali.setVisibility(View.GONE);
-            myViewHolder.btnVerif.setText("Verifikasi Peminjaman");
 
-            myViewHolder.btnVerif.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Teknisi teknisi = Teknisi.getInstance();
-                    teknisi.verifikasiPeminjaman(peminjamanList.get(i), context);
-                }
-            });
-        }else if(status.equals("3")){
-            //Verifikasi Pengembalian
-            myViewHolder.layoutTeknisiKembali.setVisibility(View.GONE);
-            myViewHolder.btnVerif.setText("Verifikasi Pengembalian");
-            myViewHolder.tvUserTeknisiPinjam.setText(peminjamanList.get(i).getUsername_verifpinjam());
+        switch (status) {
+            case "1":
+                //Verifikasi Peminjaman
+                myViewHolder.layoutTeknisiPinjam.setVisibility(View.GONE);
+                myViewHolder.layoutTeknisiKembali.setVisibility(View.GONE);
+                myViewHolder.btnVerif.setText("Verifikasi Peminjaman");
 
-            myViewHolder.btnVerif.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Teknisi teknisi = Teknisi.getInstance();
-                    teknisi.verifikasiPeminjaman(peminjamanList.get(i), context);
-                }
-            });
-        }else if(status.equals("2")){
-            //Data Peminjaman
-            myViewHolder.layoutTeknisiKembali.setVisibility(View.GONE);
-            myViewHolder.btnVerif.setVisibility(View.GONE);
-            myViewHolder.tvUserTeknisiPinjam.setText(peminjamanList.get(i).getUsername_verifpinjam());
-        }else{
-            //Data Pengembalian
-            myViewHolder.btnVerif.setVisibility(View.GONE);
-            myViewHolder.tvUserTeknisiPinjam.setText(peminjamanList.get(i).getUsername_verifpinjam());
-            myViewHolder.tvUserTeknisiKembali.setText(peminjamanList.get(i).getUsername_verifkembali());
+                myViewHolder.btnVerif.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Teknisi teknisi = Teknisi.getInstance();
+                        teknisi.verifikasiPeminjaman(peminjamanList.get(i), context);
+                    }
+                });
+                break;
+            case "3":
+                //Verifikasi Pengembalian
+                myViewHolder.layoutTeknisiKembali.setVisibility(View.GONE);
+                myViewHolder.btnVerif.setText("Verifikasi Pengembalian");
+                myViewHolder.tvUserTeknisiPinjam.setText(peminjamanList.get(i).getUsername_verifpinjam());
+
+                myViewHolder.btnVerif.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Teknisi teknisi = Teknisi.getInstance();
+                        teknisi.verifikasiPeminjaman(peminjamanList.get(i), context);
+                    }
+                });
+                break;
+            case "2":
+                //Data Peminjaman
+                myViewHolder.layoutTeknisiKembali.setVisibility(View.GONE);
+                myViewHolder.btnVerif.setVisibility(View.GONE);
+                myViewHolder.tvUserTeknisiPinjam.setText(peminjamanList.get(i).getUsername_verifpinjam());
+                break;
+            default:
+                //Data Pengembalian
+                myViewHolder.btnVerif.setVisibility(View.GONE);
+                myViewHolder.tvUserTeknisiPinjam.setText(peminjamanList.get(i).getUsername_verifpinjam());
+                myViewHolder.tvUserTeknisiKembali.setText(peminjamanList.get(i).getUsername_verifkembali());
+                break;
         }
 
         //show data mahasiswa

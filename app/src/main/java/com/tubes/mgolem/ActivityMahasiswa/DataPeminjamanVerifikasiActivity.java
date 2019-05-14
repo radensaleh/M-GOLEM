@@ -4,7 +4,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.Toast;
 
 import com.tubes.mgolem.R;
 import com.tubes.mgolem.entitas.Mahasiswa;
@@ -26,16 +25,7 @@ public class DataPeminjamanVerifikasiActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
 
-        Toast.makeText(DataPeminjamanVerifikasiActivity.this, status, Toast.LENGTH_SHORT).show();
-
-
-        if(status.equals("1")){
-            mhs.lihatPeminjaman("1", DataPeminjamanVerifikasiActivity.this, recyclerView );
-        }else if(status.equals("0")){
-            mhs.lihatPeminjaman("0", DataPeminjamanVerifikasiActivity.this, recyclerView);
-        }else{
-            mhs.lihatPeminjaman("3", DataPeminjamanVerifikasiActivity.this, recyclerView );
-        }
+        mhs.lihatPeminjaman(status, DataPeminjamanVerifikasiActivity.this, recyclerView );
 
     }
 }
