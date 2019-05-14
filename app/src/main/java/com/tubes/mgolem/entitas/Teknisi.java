@@ -94,6 +94,11 @@ public class Teknisi {
     }
 
     public void login (final String username, final String password, final Context context, final ProgressDialog pd){
+        pd.setIcon(R.drawable.login);
+        pd.setTitle("Masuk");
+        pd.setMessage("Harap Menunggu. . .");
+        pd.setCancelable(false);
+        pd.show();
 
         this.username=username;
         this.password=password;
@@ -115,7 +120,7 @@ public class Teknisi {
                                 pd.dismiss();
                                 user.setUser(teknisi.getUsername(), teknisi.getPassword(), "1");
 
-                                new AlertDialog.Builder(context).setIcon(R.drawable.success).setTitle("Login berhasil").setMessage("Selamat datang "+response.body().getUsername()).setCancelable(false)
+                                new AlertDialog.Builder(context).setIcon(R.drawable.success).setTitle("Login Berhasil").setMessage("Selamat Datang "+response.body().getNama() + " [ Username : " + response.body().getUsername() + " ]").setCancelable(false).setIcon(R.drawable.success)
                                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
@@ -132,7 +137,7 @@ public class Teknisi {
                         }else if(response.body().getErrorRes().equals("1")) {
                             pd.dismiss();
                             //Toast.makeText(context, response.body().getMessageRes().getUsername()[0], Toast.LENGTH_SHORT).show();
-                                new AlertDialog.Builder(context).setIcon(R.drawable.failed).setTitle("Login Gagal").setMessage(response.body().getMessage()).setCancelable(false)
+                                new AlertDialog.Builder(context).setIcon(R.drawable.failed).setTitle("Login Gagal").setMessage(response.body().getMessage()).setCancelable(false).setIcon(R.drawable.failed)
                                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
@@ -141,7 +146,7 @@ public class Teknisi {
                                         }).show();
                         }else if(response.body().getErrorRes().equals("2")){
                             pd.dismiss();
-                            new AlertDialog.Builder(context).setIcon(R.drawable.failed).setTitle("Login Gagal").setMessage(response.body().getMessage()).setCancelable(false)
+                            new AlertDialog.Builder(context).setIcon(R.drawable.failed).setTitle("Login Gagal").setMessage(response.body().getMessage()).setCancelable(false).setIcon(R.drawable.failed)
                                     .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
@@ -224,8 +229,32 @@ public class Teknisi {
         peminjaman.setStatus("Dikembalikan");
     }
 
-    public void ubahPassword(String password){
-        this.password = password;
+    public void ubahPassword(final String password, final Context context){
+        Call<Response> call = RetrofitClient.getInstance().baseAPI().ubahPasswordTeknisi(this.username, password);
+        call.enqueue(new Callback<Response>() {
+            @Override
+            public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
+
+                if (response.body().getErrorRes().equals("0")) {
+                    Teknisi teknisi = Teknisi.getInstance();
+                    teknisi.setPassword(password);
+                    UserDAO userDAO = new UserDAO(context);
+                    userDAO.ubahPassword(password);
+                    new AlertDialog.Builder(context).setTitle("Info").setMessage(response.body().getMessage()).setCancelable(false)
+                            .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    ((Activity) context).finish();
+                                }
+                            }).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Response> call, Throwable t) {
+                Toast.makeText(context, "Gagal", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     public String getNama() {
@@ -246,5 +275,9 @@ public class Teknisi {
 
     public String getPassword() {
         return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

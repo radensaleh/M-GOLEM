@@ -12,16 +12,19 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.tubes.mgolem.ActivityMahasiswa.DataPeminjamanVerifikasiActivity;
 import com.tubes.mgolem.ActivityMahasiswa.PengembalianBarangActivity;
 import com.tubes.mgolem.ActivityMahasiswa.PinjamBarangActivity;
+import com.tubes.mgolem.ActivityMahasiswa.UbahPasswordActivity;
+import com.tubes.mgolem.ActivityTeknisi.DataPengembalianActivity;
 import com.tubes.mgolem.SQLite.UserDAO;
 import com.tubes.mgolem.entitas.Mahasiswa;
 
 public class MenuMhsActivity extends AppCompatActivity {
     Context context;
     Dialog alertDialog;
-    private Button btnYa, btnTidak, btnLogout;
-    private CardView cvPinjamBarang, cvPengembalian;
+    private Button btnYa, btnTidak, btnLogout, btnEdit;
+    private CardView cvPinjamBarang, cvPengembalian, cvPeminjaman, cvKembaliBarang, cvDataPengembalian;
     private UserDAO userDAO;
     private TextView tvNama, tvNim;
 
@@ -32,8 +35,40 @@ public class MenuMhsActivity extends AppCompatActivity {
         context=MenuMhsActivity.this;
         userDAO = new UserDAO(context);
 
-        cvPengembalian=findViewById(R.id. cvKembali);
+        alertDialog = new Dialog(context, R.style.MyDialogTheme);
+
+        //Activity Peminjaman
+        cvPinjamBarang=findViewById(R.id.cvPinjam);
+        cvPinjamBarang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MenuMhsActivity.this, PinjamBarangActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        cvPengembalian=findViewById(R.id. cvDataKembali);
         cvPengembalian.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MenuMhsActivity.this, DataPeminjamanVerifikasiActivity.class);
+                intent.putExtra(PengembalianBarangActivity.MENU, "3");
+                startActivity(intent);
+            }
+        });
+
+        cvPeminjaman=findViewById(R.id.cvDataPinjam);
+        cvPeminjaman.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MenuMhsActivity.this, DataPeminjamanVerifikasiActivity.class);
+                intent.putExtra(PengembalianBarangActivity.MENU, "1");
+                startActivity(intent);
+            }
+        });
+
+        cvKembaliBarang=findViewById(R.id.cvKembali);
+        cvKembaliBarang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MenuMhsActivity.this, PengembalianBarangActivity.class);
@@ -43,11 +78,22 @@ public class MenuMhsActivity extends AppCompatActivity {
 
         alertDialog = new Dialog(this);
 
-        cvPinjamBarang=findViewById(R.id.cvPinjam);
-        cvPinjamBarang.setOnClickListener(new View.OnClickListener() {
+        btnEdit=findViewById(R.id.btnEditInfo);
+        btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MenuMhsActivity.this, PinjamBarangActivity.class);
+                Intent intent = new Intent(MenuMhsActivity.this, UbahPasswordActivity.class);
+                intent.putExtra(UbahPasswordActivity.status, "mhs");
+                startActivity(intent);
+            }
+        });
+
+        cvDataPengembalian=findViewById(R.id.cvDataPengembalian);
+        cvDataPengembalian.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent (MenuMhsActivity.this, DataPeminjamanVerifikasiActivity.class);
+                intent.putExtra(PengembalianBarangActivity.MENU, "0");
                 startActivity(intent);
             }
         });

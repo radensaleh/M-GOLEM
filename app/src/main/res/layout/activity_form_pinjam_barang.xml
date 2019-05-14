@@ -29,7 +29,8 @@
                 android:ems="10"
                 android:inputType="text"
                 android:layout_margin="15dp"
-                android:hint="Nama Kegiatan" />
+                android:hint="Nama Kegiatan"
+                android:textColor="#000"/>
 
         </android.support.design.widget.TextInputLayout>
 
@@ -58,8 +59,8 @@
                 android:text="Tanggal"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="2dp"
-
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:textColor="#000"/>
 
         </LinearLayout>
 
@@ -88,7 +89,8 @@
                 android:text="Tanggal"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="2dp"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:textColor="#000"/>
 
         </LinearLayout>
     </LinearLayout>

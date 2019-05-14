@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.tubes.mgolem.ActivityMahasiswa.UbahPasswordActivity;
 import com.tubes.mgolem.ActivityTeknisi.DataPengembalianActivity;
 import com.tubes.mgolem.SQLite.UserDAO;
 import com.tubes.mgolem.entitas.Teknisi;
@@ -22,7 +23,7 @@ import com.tubes.mgolem.entitas.Teknisi;
 public class MenuTeknisiActivity extends AppCompatActivity {
     Context context;
     Dialog alertDialog;
-    private Button btnYa, btnTidak, btnLogout;
+    private Button btnYa, btnTidak, btnLogout, btnUbahPass;
     private CardView cvPinjam, cvKembali, cvVerifPinjam, cvVerifKembali;
     private UserDAO  userDAO;
     private TextView tvUsername, tvNama;
@@ -37,6 +38,16 @@ public class MenuTeknisiActivity extends AppCompatActivity {
         userDAO=new UserDAO(context);
 
         btnLogout=findViewById(R.id.btnLogout);
+
+        btnUbahPass=findViewById(R.id.btnEditInfo);
+        btnUbahPass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MenuTeknisiActivity.this, UbahPasswordActivity.class);
+                intent.putExtra(UbahPasswordActivity.status, "teknisi");
+                startActivity(intent);
+            }
+        });
 
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override

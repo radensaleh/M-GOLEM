@@ -67,10 +67,10 @@
                 android:id="@+id/btnEditInfo"
                 android:drawableLeft="@drawable/ic_edit_24dp"
                 android:layout_marginTop="10dp"
-                android:layout_width="105sp"
+                android:layout_width="150sp"
                 android:layout_height="50sp"
                 android:textSize="11dp"
-                android:text="Edit"
+                android:text="Ubah Password"
                 android:textColor="@color/colorYellowDark"
                 style="@style/Widget.AppCompat.Button.Colored"/>
 

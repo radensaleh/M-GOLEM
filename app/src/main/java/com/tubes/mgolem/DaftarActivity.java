@@ -1,6 +1,7 @@
 package com.tubes.mgolem;
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -37,6 +38,7 @@ public class DaftarActivity extends AppCompatActivity {
     private Button btnYa, btnTidak, btnDaftar ;
     private EditText etNim, etNama, etPassword;
     private int kelas;
+    private ProgressDialog pd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +48,7 @@ public class DaftarActivity extends AppCompatActivity {
         mContext = this;
         tvMasuk = findViewById(R.id.tvMasuk);
         alertDialog = new Dialog(mContext);
+        pd = new ProgressDialog(mContext);
 
         etNim       = findViewById(R.id.etNim);
         etNama      = findViewById(R.id.etNama);
@@ -87,15 +90,21 @@ public class DaftarActivity extends AppCompatActivity {
                 String nim = etNim.getText().toString();
                 String password = etPassword.getText().toString();
                 String id_kelas = listKelas.getListKelas().get(kelas).getId_kelas();
-                mhs.registrasi(nama, nim, password, id_kelas, mContext);
 
                 if(nama.isEmpty()){
                     etNama.setError("Nama Kosong");
                 }else if(nim.isEmpty()){
                     etNim.setError("Nim Kosong");
+                }else if(nim.length() < 7){
+                    etNim.setError("Minimal 7 karakter");
                 }else if(password.isEmpty()){
                     etPassword.setError("Password Kosong");
+                }else if(password.length()< 8){
+                    etPassword.setError("Minimal 8 karakter");
+                }else{
+                    mhs.registrasi(nama, nim, password, id_kelas, mContext, pd);
                 }
+
             }
         });
 

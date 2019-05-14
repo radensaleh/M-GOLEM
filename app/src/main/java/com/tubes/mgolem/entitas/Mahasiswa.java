@@ -7,16 +7,17 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Handler;
+import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
+import com.tubes.mgolem.Adapter.AdapterPeminjamanMhs;
 import com.tubes.mgolem.MenuMhsActivity;
-import com.tubes.mgolem.MenuTeknisiActivity;
 import com.tubes.mgolem.R;
 import com.tubes.mgolem.Rest.Response;
 import com.tubes.mgolem.Rest.RetrofitClient;
 import com.tubes.mgolem.SQLite.UserDAO;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -81,6 +82,11 @@ public class Mahasiswa {
     }
 
     public void login(final String nim, final String password, final Context context, final ProgressDialog pd){
+        pd.setIcon(R.drawable.login);
+        pd.setTitle("Masuk");
+        pd.setMessage("Harap Menunggu. . .");
+        pd.setCancelable(false);
+        pd.show();
 
         this.nim = nim;
         this.password=password;
@@ -102,7 +108,7 @@ public class Mahasiswa {
                             if(userDAO.getUser()==null){
                                 pd.dismiss();
                                 userDAO.setUser(mhs.getNim(), mhs.getPassword(), "2");
-                                new AlertDialog.Builder(context).setIcon(R.drawable.success).setTitle("Login Berhasil").setMessage("Selamat Datang "+response.body().getNama()).setCancelable(false)
+                                new AlertDialog.Builder(context).setIcon(R.drawable.success).setTitle("Login Berhasil").setMessage("Selamat Datang "+response.body().getNama()).setCancelable(false).setIcon(R.drawable.success)
                                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
@@ -118,7 +124,7 @@ public class Mahasiswa {
                         }else if(response.body().getErrorRes().equals("1")){
                             pd.dismiss();
 //                            Toast.makeText(context, response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                            new AlertDialog.Builder(context).setIcon(R.drawable.failed).setTitle("Login Gagal").setMessage(response.body().getMessage()).setCancelable(false)
+                            new AlertDialog.Builder(context).setIcon(R.drawable.failed).setTitle("Login Gagal").setMessage(response.body().getMessage()).setCancelable(false).setIcon(R.drawable.failed)
                                     .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
@@ -128,7 +134,7 @@ public class Mahasiswa {
                         }else{
                             pd.dismiss();
 //                            Toast.makeText(context,response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                            new AlertDialog.Builder(context).setIcon(R.drawable.failed).setTitle("Login Gagal").setMessage(response.body().getMessage()).setCancelable(false)
+                            new AlertDialog.Builder(context).setIcon(R.drawable.failed).setTitle("Login Gagal").setMessage(response.body().getMessage()).setCancelable(false).setIcon(R.drawable.failed)
                                     .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
@@ -175,48 +181,82 @@ public class Mahasiswa {
 
     }
 
-    public void registrasi(String nama, String nim, String password, String kelas, final Context context){
-        Mahasiswa mhs = Mahasiswa.getInstance();
+    public void registrasi(final String nama, final String nim, final String password, final String kelas, final Context context, final ProgressDialog pd){
+        pd.setIcon(R.drawable.login);
+        pd.setTitle("Daftar");
+        pd.setMessage("Harap Menunggu. . .");
+        pd.setCancelable(false);
+        pd.show();
+
+        final Mahasiswa mhs = Mahasiswa.getInstance();
         mhs.setNim(nim);
         mhs.setKelas(kelas);
         mhs.setPassword(password);
         mhs.setNama(nama);
 
-        Call<Response> call = RetrofitClient.getInstance().baseAPI().registrasi(nama, nim, password, kelas);
-
-        call.enqueue(new Callback<Response>() {
+        Runnable rn = new Runnable() {
             @Override
-            public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
-                if(response.body().getErrorRes().equals("0")){
-                    Mahasiswa mhs = Mahasiswa.getInstance();
+            public void run() {
+                Call<Response> call = RetrofitClient.getInstance().baseAPI().registrasi(nama, nim, password, kelas);
 
-                    UserDAO userDAO = new UserDAO(context);
-                    if(userDAO.getUser()==null){
-                        userDAO.setUser(mhs.getNim(), mhs.getPassword(), "2");
-                        new AlertDialog.Builder(context).setTitle("Registrasi Berhasil").setMessage("Selamat Datang "+response.body().getNama()).setCancelable(false)
-                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        Intent intent = new Intent(context, MenuMhsActivity.class);
-                                        context.startActivity(intent);
-                                    }
-                                }).show();
-                    }else{
-                        Intent intent = new Intent(context, MenuMhsActivity.class);
-                        context.startActivity(intent);
+                call.enqueue(new Callback<Response>() {
+                    @Override
+                    public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
+                        if(response.body().getErrorRes().equals("0")){
+                            pd.dismiss();
+                            Mahasiswa mhs = Mahasiswa.getInstance();
+
+                            UserDAO userDAO = new UserDAO(context);
+                            if(userDAO.getUser()==null){
+                                pd.dismiss();
+                                userDAO.setUser(mhs.getNim(), mhs.getPassword(), "2");
+                                new AlertDialog.Builder(context).setTitle("Registrasi Berhasil").setMessage("Selamat Datang "+response.body().getNama()).setCancelable(false).setIcon(R.drawable.success)
+                                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                Intent intent = new Intent(context, MenuMhsActivity.class);
+                                                context.startActivity(intent);
+                                            }
+                                        }).show();
+                            }else{
+                                pd.dismiss();
+                                Intent intent = new Intent(context, MenuMhsActivity.class);
+                                context.startActivity(intent);
+                            }
+                        }else if(response.body().getErrorRes().equals("1")){
+                            pd.dismiss();
+                            //Toast.makeText(context, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                            new AlertDialog.Builder(context).setIcon(R.drawable.failed).setTitle("Login Gagal").setMessage(response.body().getMessage()).setCancelable(false).setIcon(R.drawable.failed)
+                                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+
+                                        }
+                                    }).show();
+                        }else{
+                            pd.dismiss();
+                            //Toast.makeText(context,response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                            new AlertDialog.Builder(context).setIcon(R.drawable.failed).setTitle("Login Gagal").setMessage(response.body().getMessage()).setCancelable(false).setIcon(R.drawable.failed)
+                                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+
+                                        }
+                                    }).show();
+                        }
                     }
-                }else if(response.body().getErrorRes().equals("1")){
-                    Toast.makeText(context, response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                }else{
-                    Toast.makeText(context,response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            }
 
-            @Override
-            public void onFailure(Call<Response> call, Throwable t) {
-
+                    @Override
+                    public void onFailure(Call<Response> call, Throwable t) {
+                        pd.dismiss();
+                        Toast.makeText(context, t.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
-        });
+        };
+
+        Handler handler = new Handler();
+        handler.postDelayed(rn, 2000);
     }
 
     public void pinjamBarang(Peminjaman peminjaman){
@@ -231,9 +271,70 @@ public class Mahasiswa {
         peminjaman.getBarangList().add(barang);
     }
 
-    public void ubahPassword(String password){
+    public void ubahPassword(final String passLama, final String password, final Context context){
+        Call<Response> call = RetrofitClient.getInstance().baseAPI().ubahPassword(this.nim, passLama, password);
+        call.enqueue(new Callback<Response>() {
+            @Override
+            public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
 
+                if (response.body().getErrorRes().equals("0")) {
+                    Mahasiswa mhs = Mahasiswa.getInstance();
+                    mhs.setPassword(password);
+                    UserDAO userDAO = new UserDAO(context);
+                    userDAO.ubahPassword(password);
+                    new AlertDialog.Builder(context).setTitle("Info").setMessage(response.body().getMessage()).setCancelable(false)
+                            .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    ((Activity) context).finish();
+                                }
+                            }).show();
+                }else if(response.body().getErrorRes().equals("1")){
+                    new AlertDialog.Builder(context).setIcon(R.drawable.failed).setTitle("Gagal").setMessage(response.body().getMessage()).setCancelable(false).setIcon(R.drawable.failed)
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            }).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Response> call, Throwable t) {
+
+            }
+        });
     }
+
+    public void lihatPeminjaman(String status, final Context context, final RecyclerView recyclerView){
+        Call<List<Peminjaman>> call = RetrofitClient.getInstance().baseAPI().getPeminjamanMhs(this.nim, status);
+
+        call.enqueue(new Callback<List<Peminjaman>>() {
+            @Override
+            public void onResponse(Call<List<Peminjaman>> call, retrofit2.Response<List<Peminjaman>> response) {
+                List<Peminjaman> listPeminjaman = response.body();
+
+
+//                if(listPeminjaman==null) {
+//                    Toast.makeText(context, "data null", Toast.LENGTH_SHORT).show();
+//                }else{
+//                    Toast.makeText(context, "sukses", Toast.LENGTH_SHORT).show();
+//                }
+
+                AdapterPeminjamanMhs adapterPeminjaman = new AdapterPeminjamanMhs(listPeminjaman,context);
+                recyclerView.setAdapter(adapterPeminjaman);
+                adapterPeminjaman.notifyDataSetChanged();
+
+            }
+
+            @Override
+            public void onFailure(Call<List<Peminjaman>> call, Throwable t) {
+                Toast.makeText(context, "Gagal" , Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
 
     public String getNim() {
         return nim;

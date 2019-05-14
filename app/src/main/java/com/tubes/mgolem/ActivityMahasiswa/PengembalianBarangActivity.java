@@ -5,8 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.tubes.mgolem.Adapter.AdapterPeminjaman;
-import com.tubes.mgolem.Adapter.AdapterPengembalian;
+import com.tubes.mgolem.Adapter.AdapterPeminjamanMhs;
 import com.tubes.mgolem.R;
 import com.tubes.mgolem.Rest.RetrofitClient;
 import com.tubes.mgolem.entitas.Mahasiswa;
@@ -21,6 +20,8 @@ import retrofit2.Response;
 public class PengembalianBarangActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
+    public static String MENU;
+    Mahasiswa mhs = Mahasiswa.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,13 +33,13 @@ public class PengembalianBarangActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
 
-        Call<List<Peminjaman>> call = RetrofitClient.getInstance().baseAPI().getPeminjaman("2");
+        Call<List<Peminjaman>> call = RetrofitClient.getInstance().baseAPI().getPeminjamanMhs(mhs.getNim(), "2");
         call.enqueue(new Callback<List<Peminjaman>>() {
             @Override
             public void onResponse(Call<List<Peminjaman>> call, Response<List<Peminjaman>> response) {
                 List<Peminjaman> listPeminjaman = response.body();
 
-                AdapterPengembalian adapterPengembalian = new AdapterPengembalian(listPeminjaman, PengembalianBarangActivity.this);
+                AdapterPeminjamanMhs adapterPengembalian = new AdapterPeminjamanMhs(listPeminjaman, PengembalianBarangActivity.this);
                 recyclerView.setAdapter(adapterPengembalian);
                 adapterPengembalian.notifyDataSetChanged();
             }

@@ -51,7 +51,7 @@ public class LoginTeknisiActivity extends AppCompatActivity {
                     etPass.setError("Minimal 8 karakter");
                 }else{
                     Teknisi teknisi = Teknisi.getInstance();
-                    teknisi.login(username, pass, context);
+                    teknisi.login(username, pass, context, pd);
                 }
             }
         });

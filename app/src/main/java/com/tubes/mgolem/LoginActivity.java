@@ -54,14 +54,14 @@ public class LoginActivity extends AppCompatActivity {
                 if(nim.isEmpty()){
                     etNim.setError("Username Kosong");
                 }else if(nim.length() < 7){
-                    etNim.setError("Minimal 8 karakter");
+                    etNim.setError("Minimal 7 karakter");
                 }else if(pass.isEmpty()){
                     etPassword.setError("Password Kosong");
                 }else if(pass.length()< 8){
                     etPassword.setError("Minimal 8 karakter");
                 }else{
                     Mahasiswa mhs = Mahasiswa.getInstance();
-                    mhs.login(nim, pass, mContext);
+                    mhs.login(nim, pass, mContext, pd);
                 }
             }
         });

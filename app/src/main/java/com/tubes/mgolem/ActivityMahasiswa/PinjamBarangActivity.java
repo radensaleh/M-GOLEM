@@ -1,6 +1,7 @@
 package com.tubes.mgolem.ActivityMahasiswa;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -67,14 +68,6 @@ public class PinjamBarangActivity extends AppCompatActivity {
         peminjaman.setNim(mhs.getNim());
         mhs.pinjamBarang(peminjaman);
 
-        Barang barang = new Barang();
-        barang.setId_barang("88");
-        barang.setKuantitas(10);
-        mhs.tambahBarang(barang);
-        Barang barang2= new Barang();
-        barang2.setId_barang("77");
-        barang2.setKuantitas(7);
-        mhs.tambahBarang(barang2);
 
         rvBarang=findViewById(R.id.rvBarang);
         layoutManager = new LinearLayoutManager(this);
@@ -104,6 +97,7 @@ public class PinjamBarangActivity extends AppCompatActivity {
         inflater = getLayoutInflater();
         dialogView = inflater.inflate(R.layout.activity_form_pinjam_barang, null);
         dialog.setView(dialogView);
+        //dialog.setCancelable(false);
         dialog.setTitle("Form Pinjam Barang");
         dialog.setCancelable(false);
         dialog.setIcon(R.drawable.pinjam);
@@ -180,6 +174,7 @@ public class PinjamBarangActivity extends AppCompatActivity {
             });
 
             final AlertDialog alertDialog = dialog.create();
+            alertDialog.setCancelable(false);
             alertDialog.show();
             alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -249,29 +244,28 @@ public class PinjamBarangActivity extends AppCompatActivity {
                 call.enqueue(new Callback<Response>() {
                     @Override
                     public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
-                        Toast.makeText(PinjamBarangActivity.this, String.valueOf(id_barang.length), Toast.LENGTH_SHORT).show();
+                        new android.app.AlertDialog.Builder(PinjamBarangActivity.this).setTitle("Info").setMessage("Peminjaman berhasil").setCancelable(false)
+                                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        finish();
+                                    }
+                                }).show();
                     }
 
                     @Override
                     public void onFailure(Call<Response> call, Throwable t) {
-                        Toast.makeText(PinjamBarangActivity.this, "Gagal", Toast.LENGTH_SHORT).show();
+                        new android.app.AlertDialog.Builder(PinjamBarangActivity.this).setTitle("Info").setMessage("Peminjaman barang gagal").setCancelable(false)
+                                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+
+                                    }
+                                }).show();
                     }
                 });
 
-//                if(mhs.getPeminjaman().getBarangList().size()==0){
-//                    new android.app.AlertDialog.Builder(PinjamBarangActivity.this)
-//                            .setTitle("Error")
-//                            .setMessage("Data barang masih kosong")
-//                            .setCancelable(false)
-//                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-//                                @Override
-//                                public void onClick(DialogInterface dialog, int which) {
 //
-//                                }
-//                            }).show();
-//                }else{
-//
-//                }
             }
         });
 
@@ -286,6 +280,11 @@ public class PinjamBarangActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void onBackPressed(){
+        finish();
     }
 
 
@@ -345,3 +344,5 @@ public class PinjamBarangActivity extends AppCompatActivity {
         }
     }
 }
+
+

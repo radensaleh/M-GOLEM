@@ -13,7 +13,12 @@
         android:supportsRtl="true"
         android:theme="@style/NoBarAppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ActivityMahasiswa.PengembalianBarangActivity"></activity>
+        <activity android:name=".ActivityMahasiswa.DataPeminjamanVerifikasiActivity"></activity>
+        <activity
+            android:name=".ActivityMahasiswa.UbahPasswordActivity"
+            android:label="Ubah Password"
+            android:theme="@style/ActionBar" />
+        <activity android:name=".ActivityMahasiswa.PengembalianBarangActivity" />
         <activity android:name=".ActivityMahasiswa.TambahBarangActivity" />
         <activity android:name=".ActivityMahasiswa.DataBarangActivity" />
         <activity android:name=".ActivityMahasiswa.ScanQRActivity" />
@@ -22,7 +27,7 @@
         <activity
             android:name=".ActivityTeknisi.DataPengembalianActivity"
             android:parentActivityName=".MenuTeknisiActivity"
-            android:theme="@style/DataBar" />
+            android:theme="@style/ActionBar" />
         <activity
             android:name=".MenuTeknisiActivity"
             android:theme="@style/MenuNoBar" />
