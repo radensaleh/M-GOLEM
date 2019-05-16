@@ -40,6 +40,14 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!-- Action Bar -->
+    <style name="NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorYellowDark</item>
+        <item name="colorPrimaryDark">@color/colorYellowDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
     <!--Dialog Animation-->
     <style name="DialogAnimation">
         <item name="android:windowEnterAnimation">@anim/slide_up</item>

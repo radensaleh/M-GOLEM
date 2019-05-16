@@ -46,10 +46,11 @@
                 android:id="@+id/btnTanggalPinjam"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
-                android:text="Tanggal Pinjam"
+                android:text="Tanggal Pinjam "
                 android:textColor="@color/colorWhite"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
+                android:layout_marginBottom="5dp"
                 android:background="@drawable/btn_shape" />
 
             <TextView
@@ -80,6 +81,7 @@
                 android:textColor="@color/colorWhite"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
+                android:layout_marginBottom="5dp"
                 android:background="@drawable/btn_shape" />
 
             <TextView

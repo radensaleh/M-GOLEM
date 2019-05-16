@@ -135,7 +135,7 @@ public class PinjamBarangActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     if(peminjaman.getTgl_pinjam()==null){
-                        Toast.makeText(PinjamBarangActivity.this, "Tanggal pinjam harus diisi!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(PinjamBarangActivity.this, "Tanggal Pinjam Harus Diisi!", Toast.LENGTH_LONG).show();
                     }else{
                         final Calendar c = Calendar.getInstance();
                         mYear = c.get(Calendar.YEAR);
@@ -181,11 +181,11 @@ public class PinjamBarangActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     String namaKegiatan = etKegiatan.getText().toString();
                     if(namaKegiatan.isEmpty()){
-                        etKegiatan.setError("Nama kegiatan harus diisi");
+                        etKegiatan.setError("Nama Kegiatan Harus Diisi");
                     }else if(peminjaman.getTgl_pinjam()==null){
-                        Toast.makeText(PinjamBarangActivity.this, "Tanggal pinjam harus diisi!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(PinjamBarangActivity.this, "Tanggal Pinjam Harus Diisi!", Toast.LENGTH_LONG).show();
                     }else if(peminjaman.getTgl_kembali()==null){
-                        Toast.makeText(PinjamBarangActivity.this, "Tanggal kembali harus diisi!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(PinjamBarangActivity.this, "Tanggal Kembali Harus Diisi!", Toast.LENGTH_LONG).show();
                     }else{
                         peminjaman.setNama_kegiatan(namaKegiatan);
                         mhs.pinjamBarang(peminjaman);
@@ -220,7 +220,7 @@ public class PinjamBarangActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(mhs.getPeminjaman().getBarangList().size()==0){
-                    new android.app.AlertDialog.Builder(PinjamBarangActivity.this).setTitle("Gagal").setMessage("Data barang belum ditambahkan").setCancelable(false)
+                    new android.app.AlertDialog.Builder(PinjamBarangActivity.this).setTitle("Gagal").setMessage("Data Barang Belum Ditambahkan").setCancelable(false).setIcon(R.drawable.failed)
                             .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
@@ -248,7 +248,7 @@ public class PinjamBarangActivity extends AppCompatActivity {
                     call.enqueue(new Callback<Response>() {
                         @Override
                         public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
-                            new android.app.AlertDialog.Builder(PinjamBarangActivity.this).setTitle("Info").setMessage("Peminjaman berhasil").setCancelable(false)
+                            new android.app.AlertDialog.Builder(PinjamBarangActivity.this).setTitle("Berhasil").setMessage("Peminjaman Berhasil").setCancelable(false).setIcon(R.drawable.success)
                                     .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
@@ -259,7 +259,7 @@ public class PinjamBarangActivity extends AppCompatActivity {
 
                         @Override
                         public void onFailure(Call<Response> call, Throwable t) {
-                            new android.app.AlertDialog.Builder(PinjamBarangActivity.this).setTitle("Info").setMessage("Peminjaman barang gagal").setCancelable(false)
+                            new android.app.AlertDialog.Builder(PinjamBarangActivity.this).setTitle("Gagal").setMessage("Peminjaman Barang Gagal").setCancelable(false).setIcon(R.drawable.failed)
                                     .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {

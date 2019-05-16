@@ -53,6 +53,7 @@ public class MenuMhsActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MenuMhsActivity.this, DataPeminjamanVerifikasiActivity.class);
                 intent.putExtra(PengembalianBarangActivity.MENU, "3");
+                intent.putExtra("Verifikasi", "3");
                 startActivity(intent);
             }
         });
@@ -63,6 +64,7 @@ public class MenuMhsActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MenuMhsActivity.this, DataPeminjamanVerifikasiActivity.class);
                 intent.putExtra(PengembalianBarangActivity.MENU, "1");
+                intent.putExtra("Verifikasi", "1");
                 startActivity(intent);
             }
         });
@@ -94,6 +96,7 @@ public class MenuMhsActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent (MenuMhsActivity.this, DataPeminjamanVerifikasiActivity.class);
                 intent.putExtra(PengembalianBarangActivity.MENU, "0");
+                intent.putExtra("Verifikasi", "0");
                 startActivity(intent);
             }
         });

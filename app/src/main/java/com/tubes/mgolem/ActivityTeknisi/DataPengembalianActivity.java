@@ -35,6 +35,7 @@ public class DataPengembalianActivity extends AppCompatActivity {
 
         tvKosong = findViewById(R.id.tvKosong);
         pb = findViewById(R.id.pb);
+
         Sprite spkit = new CubeGrid();
         pb.setIndeterminateDrawable(spkit);
 
@@ -44,16 +45,16 @@ public class DataPengembalianActivity extends AppCompatActivity {
 
         if(menu.equals("VerifPengembalian")){
             setTitle("Verifikasi Pengembalian");
-            teknisi.lihatPeminjaman("3", this, recyclerView);
+            teknisi.lihatPeminjaman("3", this, recyclerView, pb, tvKosong);
         }else if(menu.equals("VerifPeminjaman")){
             setTitle("Verifikasi Peminjaman");
-            teknisi.lihatPeminjaman("1", this ,recyclerView);
+            teknisi.lihatPeminjaman("1", this ,recyclerView, pb, tvKosong);
         }else if(menu.equals("DataPeminjaman")){
             setTitle("Data Peminjaman");
-            teknisi.lihatPeminjaman("2", this, recyclerView);
+            teknisi.lihatPeminjaman("2", this, recyclerView, pb, tvKosong);
         }else{
             setTitle("Data Pengembalian");
-            teknisi.lihatPeminjaman("0", this, recyclerView);
+            teknisi.lihatPeminjaman("0", this, recyclerView, pb, tvKosong);
         }
 
 

@@ -62,6 +62,7 @@
                 android:textColor="@color/colorWhite"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
+                android:layout_marginBottom="5dp"
                 android:background="@drawable/btn_shape" />
 
             <Button
@@ -72,6 +73,7 @@
                 android:textColor="@color/colorWhite"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
+                android:layout_marginBottom="5dp"
                 android:background="@drawable/btn_shape" />
 
         </LinearLayout>

@@ -50,6 +50,7 @@ public class AdapterBarang extends RecyclerView.Adapter<AdapterBarang.MyViewHold
                             .setTitle("Peringatan")
                             .setMessage("Hapus data barang?")
                             .setCancelable(false)
+                            .setIcon(R.drawable.warning)
                             .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
@@ -78,7 +79,7 @@ public class AdapterBarang extends RecyclerView.Adapter<AdapterBarang.MyViewHold
                         data.append("Merk : "+response.body().getMerk()+"\n");
                         data.append("Tipe : "+response.body().getTipe());
 
-                        new AlertDialog.Builder(context).setTitle("Data Barang").setMessage(data).setCancelable(false)
+                        new AlertDialog.Builder(context).setTitle("Data Barang").setMessage(data).setCancelable(false).setIcon(R.drawable.pinjam)
                                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {

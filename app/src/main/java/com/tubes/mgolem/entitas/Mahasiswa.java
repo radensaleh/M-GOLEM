@@ -8,6 +8,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tubes.mgolem.Adapter.AdapterPeminjamanMhs;
@@ -307,14 +310,26 @@ public class Mahasiswa {
         });
     }
 
-    public void lihatPeminjaman(String status, final Context context, final RecyclerView recyclerView){
-        Call<List<Peminjaman>> call = RetrofitClient.getInstance().baseAPI().getPeminjamanMhs(this.nim, status);
+    public void lihatPeminjaman(final String status, final Context context, final RecyclerView recyclerView, final ProgressBar pb, final TextView tvKosong){
+        pb.setVisibility(View.VISIBLE);
+        tvKosong.setVisibility(View.INVISIBLE);
 
-        call.enqueue(new Callback<List<Peminjaman>>() {
+        Runnable rn = new Runnable() {
             @Override
-            public void onResponse(Call<List<Peminjaman>> call, retrofit2.Response<List<Peminjaman>> response) {
-                List<Peminjaman> listPeminjaman = response.body();
+            public void run() {
+                Call<List<Peminjaman>> call = RetrofitClient.getInstance().baseAPI().getPeminjamanMhs(nim, status);
 
+                call.enqueue(new Callback<List<Peminjaman>>() {
+                    @Override
+                    public void onResponse(Call<List<Peminjaman>> call, retrofit2.Response<List<Peminjaman>> response) {
+                        if(response.body().size() == 0){
+                            pb.setVisibility(View.GONE);
+                            tvKosong.setVisibility(View.VISIBLE);
+                        }else{
+                            pb.setVisibility(View.GONE);
+                            tvKosong.setVisibility(View.INVISIBLE);
+
+                            List<Peminjaman> listPeminjaman = response.body();
 
 //                if(listPeminjaman==null) {
 //                    Toast.makeText(context, "data null", Toast.LENGTH_SHORT).show();
@@ -322,17 +337,25 @@ public class Mahasiswa {
 //                    Toast.makeText(context, "sukses", Toast.LENGTH_SHORT).show();
 //                }
 
-                AdapterPeminjamanMhs adapterPeminjaman = new AdapterPeminjamanMhs(listPeminjaman,context);
-                recyclerView.setAdapter(adapterPeminjaman);
-                adapterPeminjaman.notifyDataSetChanged();
+                            AdapterPeminjamanMhs adapterPeminjaman = new AdapterPeminjamanMhs(listPeminjaman,context);
+                            recyclerView.setAdapter(adapterPeminjaman);
+                            adapterPeminjaman.notifyDataSetChanged();
+                        }
 
-            }
+                    }
 
-            @Override
-            public void onFailure(Call<List<Peminjaman>> call, Throwable t) {
-                Toast.makeText(context, "Gagal" , Toast.LENGTH_SHORT).show();
+                    @Override
+                    public void onFailure(Call<List<Peminjaman>> call, Throwable t) {
+                        Toast.makeText(context, "Gagal" , Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
-        });
+        };
+
+        Handler handler = new Handler();
+        handler.postDelayed(rn, 2000);
+
+
     }
 
 

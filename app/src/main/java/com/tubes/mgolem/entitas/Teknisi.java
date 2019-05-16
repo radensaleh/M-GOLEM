@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tubes.mgolem.Adapter.AdapterBarang;
@@ -172,24 +173,43 @@ public class Teknisi {
 
     }
 
-    public void lihatPeminjaman(String status, final Context context, final RecyclerView recyclerView){
-        Call<List<Peminjaman>> call = RetrofitClient.getInstance().baseAPI().getPeminjaman(status);
+    public void lihatPeminjaman(final String status, final Context context, final RecyclerView recyclerView, final ProgressBar pb, final TextView tvKosong){
+        pb.setVisibility(View.VISIBLE);
+        tvKosong.setVisibility(View.INVISIBLE);
 
-        call.enqueue(new Callback<List<Peminjaman>>() {
+        Runnable rn = new Runnable() {
             @Override
-            public void onResponse(Call<List<Peminjaman>> call, retrofit2.Response<List<Peminjaman>> response) {
-                List<Peminjaman> listPeminjaman = response.body();
-                AdapterPeminjaman adapterPeminjaman = new AdapterPeminjaman(listPeminjaman,context);
-                recyclerView.setAdapter(adapterPeminjaman);
-                adapterPeminjaman.notifyDataSetChanged();
+            public void run() {
+                Call<List<Peminjaman>> call = RetrofitClient.getInstance().baseAPI().getPeminjaman(status);
 
-            }
+                call.enqueue(new Callback<List<Peminjaman>>() {
+                    @Override
+                    public void onResponse(Call<List<Peminjaman>> call, retrofit2.Response<List<Peminjaman>> response) {
+                        if(response.body().size() == 0){
+                            pb.setVisibility(View.GONE);
+                            tvKosong.setVisibility(View.VISIBLE);
+                        }else{
+                            pb.setVisibility(View.GONE);
+                            tvKosong.setVisibility(View.INVISIBLE);
 
-            @Override
-            public void onFailure(Call<List<Peminjaman>> call, Throwable t) {
-                Toast.makeText(context, "Gagal" , Toast.LENGTH_SHORT).show();
+                            List<Peminjaman> listPeminjaman = response.body();
+                            AdapterPeminjaman adapterPeminjaman = new AdapterPeminjaman(listPeminjaman, context);
+                            recyclerView.setAdapter(adapterPeminjaman);
+                            adapterPeminjaman.notifyDataSetChanged();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<Peminjaman>> call, Throwable t) {
+                        Toast.makeText(context, "Gagal" , Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
-        });
+        };
+
+        Handler handler = new Handler();
+        handler.postDelayed(rn, 2000);
+
     }
 
     public void verifikasiPeminjaman(Peminjaman peminjaman, final Context context){
@@ -228,28 +248,43 @@ public class Teknisi {
 
     }
 
-    public void lihatDataBarang(final Context context, final RecyclerView recyclerView){
-        Call<List<Barang>> call = RetrofitClient.getInstance().baseAPI().getBarang();
+    public void lihatDataBarang(final Context context, final RecyclerView recyclerView, final ProgressBar pb, final TextView tvKosong){
+        pb.setVisibility(View.VISIBLE);
+        tvKosong.setVisibility(View.INVISIBLE);
 
-        call.enqueue(new Callback<List<Barang>>() {
+        Runnable rn = new Runnable() {
             @Override
-            public void onResponse(Call<List<Barang>> call, retrofit2.Response<List<Barang>> response) {
-                if(response.body()==null){
-                    Toast.makeText(context, "null", Toast.LENGTH_SHORT).show();
-                }else {
-                    List<Barang> listBarang = response.body();
-                    AdapterBarangTeknisi adapterBarangTeknisi = new AdapterBarangTeknisi(listBarang, context);
-                    recyclerView.setAdapter(adapterBarangTeknisi);
-                    adapterBarangTeknisi.notifyDataSetChanged();
-                }
+            public void run() {
+                Call<List<Barang>> call = RetrofitClient.getInstance().baseAPI().getBarang();
 
+                call.enqueue(new Callback<List<Barang>>() {
+                    @Override
+                    public void onResponse(Call<List<Barang>> call, retrofit2.Response<List<Barang>> response) {
+                        if(response.body().size() == 0){
+                            pb.setVisibility(View.GONE);
+                            tvKosong.setVisibility(View.VISIBLE);
+                        }else {
+                            pb.setVisibility(View.GONE);
+                            tvKosong.setVisibility(View.INVISIBLE);
+
+                            List<Barang> listBarang = response.body();
+                            AdapterBarangTeknisi adapterBarangTeknisi = new AdapterBarangTeknisi(listBarang, context);
+                            recyclerView.setAdapter(adapterBarangTeknisi);
+                            adapterBarangTeknisi.notifyDataSetChanged();
+                        }
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<Barang>> call, Throwable t) {
+
+                    }
+                });
             }
+        };
 
-            @Override
-            public void onFailure(Call<List<Barang>> call, Throwable t) {
-
-            }
-        });
+        Handler handler = new Handler();
+        handler.postDelayed(rn, 2000);
     }
 
     public void ubahPassword(final String password, final Context context){

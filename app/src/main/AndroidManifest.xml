@@ -13,18 +13,21 @@
         android:supportsRtl="true"
         android:theme="@style/NoBarAppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ActivityTeknisi.DataBarangTeknisiActivity"></activity>
-        <activity android:name=".ActivityMahasiswa.DataPeminjamanVerifikasiActivity" />
+        <activity android:name=".ActivityTeknisi.DataBarangTeknisiActivity" android:theme="@style/ActionBar" android:label="Data Barang" android:parentActivityName=".MenuTeknisiActivity"></activity>
+        <activity android:name=".ActivityMahasiswa.DataPeminjamanVerifikasiActivity"  android:theme="@style/ActionBar" android:parentActivityName=".MenuMhsActivity"/>
         <activity
             android:name=".ActivityMahasiswa.UbahPasswordActivity"
             android:label="Ubah Password"
+            android:parentActivityName=".MenuMhsActivity"
             android:theme="@style/ActionBar" />
-        <activity android:name=".ActivityMahasiswa.PengembalianBarangActivity" />
-        <activity android:name=".ActivityMahasiswa.TambahBarangActivity" />
-        <activity android:name=".ActivityMahasiswa.DataBarangActivity" />
-        <activity android:name=".ActivityMahasiswa.ScanQRActivity" />
-        <activity android:name=".ActivityMahasiswa.FormPinjamBarangActivity" />
-        <activity android:name=".ActivityMahasiswa.PinjamBarangActivity" />
+        <activity android:name=".ActivityMahasiswa.PengembalianBarangActivity" android:theme="@style/ActionBar" android:label="Pengembalian" android:parentActivityName=".MenuMhsActivity" />
+        <activity
+            android:name=".ActivityMahasiswa.TambahBarangActivity"
+            android:theme="@style/MenuNoBar"/>
+        <activity android:name=".ActivityMahasiswa.DataBarangActivity" android:theme="@style/NoActionBar"/>
+        <activity android:name=".ActivityMahasiswa.ScanQRActivity" android:theme="@style/NoActionBar"/>
+        <activity android:name=".ActivityMahasiswa.FormPinjamBarangActivity"  android:theme="@style/NoActionBar" />
+        <activity android:name=".ActivityMahasiswa.PinjamBarangActivity"  android:theme="@style/NoActionBar" />
         <activity
             android:name=".ActivityTeknisi.DataPengembalianActivity"
             android:parentActivityName=".MenuTeknisiActivity"

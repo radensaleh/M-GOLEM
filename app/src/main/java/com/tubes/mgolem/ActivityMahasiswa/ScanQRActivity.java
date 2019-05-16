@@ -73,8 +73,9 @@ public class ScanQRActivity extends AppCompatActivity implements ZXingScannerVie
         if(eq){
             new android.app.AlertDialog.Builder(ScanQRActivity.this)
                     .setTitle("Gagal")
-                    .setMessage("Data barang sudah dimasukan")
+                    .setMessage("Data Barang Sudah Dimasukan")
                     .setCancelable(false)
+                    .setIcon(R.drawable.failed)
                     .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -90,6 +91,7 @@ public class ScanQRActivity extends AppCompatActivity implements ZXingScannerVie
                     inflater = getLayoutInflater();
                     dialogView=inflater.inflate(R.layout.activity_data_barang, null);
                     dialog.setView(dialogView);
+                    dialog.setIcon(R.drawable.pinjam);
                     dialog.setTitle("Data Barang");
 
                     final TextView tvIdBarang, tvTipe, tvKategori, tvMerk, tvStok;
@@ -131,9 +133,9 @@ public class ScanQRActivity extends AppCompatActivity implements ZXingScannerVie
                                 Barang barang = new Barang();
                                 String kuantitas = etKuantitas.getText().toString();
                                 if (kuantitas.isEmpty()) {
-                                    etKuantitas.setError("Kuantitas tidak boleh kosong");
+                                    etKuantitas.setError("Kuantitas Tidak Boleh Kosong");
                                 }else if(response.body().getKuantitas() < Integer.parseInt(kuantitas)){
-                                    Toast.makeText(ScanQRActivity.this, "Jumlah barang tidak boleh melebihi stok", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(ScanQRActivity.this, "Jumlah Barang Tidak Boleh Melebihi Stok", Toast.LENGTH_SHORT).show();
                                 }else{
                                     barang.setKuantitas(Integer.parseInt(kuantitas));
                                     barang.setId_barang(rawResult.getText());
