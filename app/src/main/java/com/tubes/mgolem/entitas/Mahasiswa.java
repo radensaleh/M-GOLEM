@@ -210,7 +210,7 @@ public class Mahasiswa {
                             if(userDAO.getUser()==null){
                                 pd.dismiss();
                                 userDAO.setUser(mhs.getNim(), mhs.getPassword(), "2");
-                                new AlertDialog.Builder(context).setTitle("Registrasi Berhasil").setMessage("Selamat Datang "+response.body().getNama()).setCancelable(false).setIcon(R.drawable.success)
+                                new AlertDialog.Builder(context).setTitle("Registrasi Berhasil").setMessage("Selamat Datang "+mhs.getNama()).setCancelable(false).setIcon(R.drawable.success)
                                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
