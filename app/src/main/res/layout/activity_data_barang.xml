@@ -91,7 +91,27 @@
                     android:textColor="#000"/>
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="10dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Jumlah yang tersedia : "
+                    android:textSize="15sp"
+                    android:textColor="#000"/>
 
+                <TextView
+                    android:id="@+id/tvStok"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textSize="15sp"
+                    android:textColor="#000"/>
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"

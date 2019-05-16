@@ -24,14 +24,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="ID Peminjaman : "
+                android:text="ID Barang : "
                 android:textStyle="bold"
                 android:textSize="18dp"
                 android:layout_marginBottom="5dp"
                 android:textColor="#000"/>
 
             <TextView
-                android:id="@+id/tvIdPeminjaman"
+                android:id="@+id/tvIdBarang"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="VVIP"
@@ -50,16 +50,16 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Peminjam : "
+                android:text="Tipe : "
                 android:textSize="15dp"
                 android:layout_marginBottom="5dp"
                 android:textColor="#000"/>
 
             <TextView
-                android:id="@+id/tvNimMhs"
+                android:id="@+id/tvTipe"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="NIM"
+                android:text="Tipe"
                 android:textSize="15dp"
                 android:layout_marginBottom="5dp"
                 android:textColor="#000"/>
@@ -75,16 +75,16 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Teknisi Pinjam : "
+                android:text="Kategori : "
                 android:textSize="15dp"
                 android:layout_marginBottom="5dp"
                 android:textColor="#000"/>
 
             <TextView
-                android:id="@+id/tvUserTeknisiPinjam"
+                android:id="@+id/tvKategori"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Username"
+                android:text="Kategori"
                 android:textSize="15dp"
                 android:layout_marginBottom="5dp"
                 android:textColor="#000"/>
@@ -100,71 +100,22 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Teknisi Kembali : "
+                android:text="Merk : "
                 android:textSize="15dp"
                 android:layout_marginBottom="5dp"
                 android:textColor="#000"/>
 
             <TextView
-                android:id="@+id/tvUserTeknisiKembali"
+                android:id="@+id/tvMerkBarangTeknisi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Username"
+                android:text="Merk"
                 android:textSize="15dp"
                 android:layout_marginBottom="5dp"
                 android:textColor="#000"/>
 
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/layoutTanggalPinjam"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Tanggal Pinjam : "
-                android:textSize="15dp"
-                android:layout_marginBottom="5dp"
-                android:textColor="#000"/>
-
-            <TextView
-                android:id="@+id/tvTanggalPinjam"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="27/01/1999"
-                android:textSize="15dp"
-                android:layout_marginBottom="5dp"
-                android:textColor="#000"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/layoutTanggalKembali"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Tanggal Kembali : "
-                android:textSize="15dp"
-                android:layout_marginBottom="5dp"
-                android:textColor="#000"/>
-
-            <TextView
-                android:id="@+id/tvTanggalKembali"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="27/01/1999"
-                android:textSize="15dp"
-                android:layout_marginBottom="5dp"
-                android:textColor="#000"/>
-
-        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -174,61 +125,20 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Nama Kegiatan : "
+                android:text="Kuantitas : "
                 android:textSize="15dp"
                 android:layout_marginBottom="5dp"
                 android:textColor="#000"/>
 
             <TextView
-                android:id="@+id/tvNamaKegiatan"
+                android:id="@+id/tvKuantitasTeknisi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Ini nama kegiatan"
+                android:text="ini kuantitas"
                 android:textSize="15dp"
                 android:layout_marginBottom="5dp"
                 android:textColor="#000"/>
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/btnDataSiswa"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_margin="2dp"
-                android:layout_marginRight="5dp"
-                android:textSize="13dp"
-                android:text="Data Mahasiswa"
-                android:textColor="@color/colorWhite"
-                android:background="@drawable/btn_shape"
-                android:layout_height="wrap_content" />
-
-            <Button
-                android:id="@+id/btnInfoBarang"
-                android:layout_width="0dp"
-                android:layout_margin="2dp"
-                android:layout_marginLeft="5dp"
-                android:layout_weight="1"
-                android:textSize="13dp"
-                android:text="Data Barang"
-                android:textColor="@color/colorWhite"
-                android:background="@drawable/btn_shape"
-                android:layout_height="wrap_content" />
-
-        </LinearLayout>
-
-
-        <Button
-            android:id="@+id/btnVerifikasi"
-            android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
-            android:text="Verifikasi Pengembalian"
-            android:textColor="@color/colorWhite"
-            android:background="@drawable/btn_default"
-            android:layout_height="match_parent" />
 
     </LinearLayout>
 

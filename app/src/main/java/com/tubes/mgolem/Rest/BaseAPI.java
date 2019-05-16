@@ -47,6 +47,7 @@ public interface BaseAPI {
     @POST("ubahPassword")
     Call<Response> ubahPassword(
             @Field("nim") String nim,
+            @Field("oldPassword") String oldPassword,
             @Field("password") String password
     );
 
@@ -88,6 +89,11 @@ public interface BaseAPI {
     @GET("getDaftarBarang")
     Call<List<Barang>> getDaftarBarang(
             @Query("id_pinjam") String id_pinjam
+    );
+
+    @GET("barangAll")
+    Call<List<Barang>> getBarang(
+
     );
 
     @GET("kelas")

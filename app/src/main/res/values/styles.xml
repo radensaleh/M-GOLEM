@@ -29,11 +29,11 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorYellow</item>
         <item name="colorPrimaryDark">@color/colorYellowDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorAccent">@color/colorWhite</item>
     </style>
 
-    <!-- No Action Bar -->
-    <style name="DataBar" parent="Theme.AppCompat.Light.DarkActionBar">
+    <!-- Action Bar -->
+    <style name="ActionBar" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorYellowDark</item>
         <item name="colorPrimaryDark">@color/colorYellowDark</item>

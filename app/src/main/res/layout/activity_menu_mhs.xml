@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
     tools:context=".MenuMhsActivity">
 
     <LinearLayout
@@ -13,6 +14,7 @@
         <ImageView
             android:layout_weight="0.6"
             android:layout_width="match_parent"
+            android:background="@color/colorYellowDark"
             android:layout_height="0dp" />
 
         <ImageView
@@ -166,7 +168,7 @@
                     android:textColor="#000"
                     android:textSize="13sp"
                     android:layout_marginTop="5dp"
-                    android:text="Data peminjaman"/>
+                    android:text="Pengembalian"/>
 
             </LinearLayout>
 
@@ -216,7 +218,7 @@
                     android:textColor="#000"
                     android:textSize="13sp"
                     android:layout_marginTop="5dp"
-                    android:text="Verifikasi peminjaman"/>
+                    android:text="Menunggu verifikasi\n peminjaman"/>
 
                 <!--<TextView-->
                     <!--android:layout_width="wrap_content"-->
@@ -259,7 +261,7 @@
                     android:textColor="#000"
                     android:textSize="12sp"
                     android:layout_marginTop="5dp"
-                    android:text="Verifikasi Pengembalian"/>
+                    android:text="Menunggu verifikasi \n pengembalian"/>
 
                 <!--<TextView-->
                     <!--android:layout_width="wrap_content"-->

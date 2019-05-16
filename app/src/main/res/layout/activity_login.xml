@@ -12,7 +12,7 @@
     <de.hdodenhof.circleimageview.CircleImageView
         android:layout_width="100dp"
         android:layout_height="100dp"
-        app:civ_border_color="@color/colorAccent"
+        app:civ_border_color="@color/colorWhite"
         app:civ_border_width="3dp"
         android:src="@drawable/mahasiswa"/>
 
@@ -23,7 +23,7 @@
         android:text="MAHASISWA"
         android:fontFamily="serif-monospace"
         android:textSize="20sp"
-        android:textColor="@color/colorAccent"/>
+        android:textColor="@color/colorWhite"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -40,7 +40,7 @@
 
             <EditText
                 android:id="@+id/etNim"
-                android:drawableLeft="@drawable/ic_credit_card_white_24dp"
+                android:drawableRight="@drawable/ic_credit_card_white_24dp"
                 android:layout_width="250dp"
                 android:inputType="number"
                 android:layout_height="wrap_content"
@@ -53,11 +53,11 @@
             android:layout_marginTop="10dp"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
+            app:passwordToggleEnabled="true"
             android:layout_centerHorizontal="true">
 
             <EditText
                 android:id="@+id/etPassword"
-                android:drawableLeft="@drawable/ic_lock_outline_white_24dp"
                 android:layout_marginTop="10dp"
                 android:layout_width="250dp"
                 android:fontFamily="serif-monospace"
@@ -75,8 +75,8 @@
         android:layout_width="250dp"
         android:text="MASUK"
         android:fontFamily="serif-monospace"
-        android:textColor="@color/colorAccent"
-        android:background="@drawable/btn_shape"
+        android:textColor="@color/colorWhite"
+        android:background="@drawable/btn_shape1"
         android:layout_height="wrap_content" />
 
     <LinearLayout
@@ -89,7 +89,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/colorWhite"
             android:fontFamily="serif-monospace"
             android:text="Belum punya akun? "/>
 
@@ -97,7 +97,7 @@
             android:id="@+id/tvDaftar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/colorWhite"
             android:textStyle="bold"
             android:fontFamily="serif-monospace"
             android:text=" Daftar "/>

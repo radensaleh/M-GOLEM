@@ -84,6 +84,8 @@ public class AdapterPeminjamanMhs extends RecyclerView.Adapter<AdapterPeminjaman
         }else{
             myViewHolder.tvUserTeknisiKembali.setText(peminjamanList.get(i).getUsername_verifkembali());
             myViewHolder.tvUserTeknisiPinjam.setText(peminjamanList.get(i).getUsername_verifpinjam());
+            myViewHolder.btnVerif.setVisibility(View.GONE);
+            myViewHolder.btnDataMhs.setVisibility(View.GONE);
         }
 
         myViewHolder.btnInfoBarang.setOnClickListener(new View.OnClickListener() {

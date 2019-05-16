@@ -14,6 +14,8 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.tubes.mgolem.Adapter.AdapterBarang;
+import com.tubes.mgolem.Adapter.AdapterBarangTeknisi;
 import com.tubes.mgolem.Adapter.AdapterPeminjaman;
 import com.tubes.mgolem.MenuMhsActivity;
 import com.tubes.mgolem.MenuTeknisiActivity;
@@ -94,6 +96,11 @@ public class Teknisi {
     }
 
     public void login (final String username, final String password, final Context context, final ProgressDialog pd){
+        pd.setIcon(R.drawable.login);
+        pd.setTitle("Masuk");
+        pd.setMessage("Harap Menunggu. . .");
+        pd.setCancelable(false);
+        pd.show();
 
         this.username=username;
         this.password=password;
@@ -115,7 +122,7 @@ public class Teknisi {
                                 pd.dismiss();
                                 user.setUser(teknisi.getUsername(), teknisi.getPassword(), "1");
 
-                                new AlertDialog.Builder(context).setIcon(R.drawable.success).setTitle("Login berhasil").setMessage("Selamat datang "+response.body().getUsername()).setCancelable(false)
+                                new AlertDialog.Builder(context).setIcon(R.drawable.success).setTitle("Login Berhasil").setMessage("Selamat Datang "+response.body().getNama() + " [ Username : " + response.body().getUsername() + " ]").setCancelable(false).setIcon(R.drawable.success)
                                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
@@ -132,7 +139,7 @@ public class Teknisi {
                         }else if(response.body().getErrorRes().equals("1")) {
                             pd.dismiss();
                             //Toast.makeText(context, response.body().getMessageRes().getUsername()[0], Toast.LENGTH_SHORT).show();
-                                new AlertDialog.Builder(context).setIcon(R.drawable.failed).setTitle("Login Gagal").setMessage(response.body().getMessage()).setCancelable(false)
+                                new AlertDialog.Builder(context).setIcon(R.drawable.failed).setTitle("Login Gagal").setMessage(response.body().getMessage()).setCancelable(false).setIcon(R.drawable.failed)
                                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
@@ -141,7 +148,7 @@ public class Teknisi {
                                         }).show();
                         }else if(response.body().getErrorRes().equals("2")){
                             pd.dismiss();
-                            new AlertDialog.Builder(context).setIcon(R.drawable.failed).setTitle("Login Gagal").setMessage(response.body().getMessage()).setCancelable(false)
+                            new AlertDialog.Builder(context).setIcon(R.drawable.failed).setTitle("Login Gagal").setMessage(response.body().getMessage()).setCancelable(false).setIcon(R.drawable.failed)
                                     .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
@@ -172,14 +179,6 @@ public class Teknisi {
             @Override
             public void onResponse(Call<List<Peminjaman>> call, retrofit2.Response<List<Peminjaman>> response) {
                 List<Peminjaman> listPeminjaman = response.body();
-
-
-//                if(listPeminjaman==null) {
-//                    Toast.makeText(context, "data null", Toast.LENGTH_SHORT).show();
-//                }else{
-//                    Toast.makeText(context, "sukses", Toast.LENGTH_SHORT).show();
-//                }
-
                 AdapterPeminjaman adapterPeminjaman = new AdapterPeminjaman(listPeminjaman,context);
                 recyclerView.setAdapter(adapterPeminjaman);
                 adapterPeminjaman.notifyDataSetChanged();
@@ -209,6 +208,15 @@ public class Teknisi {
                                     ((Activity) context).finish();
                                 }
                             }).show();
+                }else{
+                    new AlertDialog.Builder(context).setTitle("Gagal").setCancelable(false)
+                            .setMessage(response.body().getMessage())
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            }).show();
                 }
             }
 
@@ -220,8 +228,28 @@ public class Teknisi {
 
     }
 
-    public void verifikasiPengembalian(Peminjaman peminjaman){
-        peminjaman.setStatus("Dikembalikan");
+    public void lihatDataBarang(final Context context, final RecyclerView recyclerView){
+        Call<List<Barang>> call = RetrofitClient.getInstance().baseAPI().getBarang();
+
+        call.enqueue(new Callback<List<Barang>>() {
+            @Override
+            public void onResponse(Call<List<Barang>> call, retrofit2.Response<List<Barang>> response) {
+                if(response.body()==null){
+                    Toast.makeText(context, "null", Toast.LENGTH_SHORT).show();
+                }else {
+                    List<Barang> listBarang = response.body();
+                    AdapterBarangTeknisi adapterBarangTeknisi = new AdapterBarangTeknisi(listBarang, context);
+                    recyclerView.setAdapter(adapterBarangTeknisi);
+                    adapterBarangTeknisi.notifyDataSetChanged();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<List<Barang>> call, Throwable t) {
+
+            }
+        });
     }
 
     public void ubahPassword(final String password, final Context context){

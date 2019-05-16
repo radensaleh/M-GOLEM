@@ -99,6 +99,8 @@ public class PinjamBarangActivity extends AppCompatActivity {
         dialog.setView(dialogView);
         //dialog.setCancelable(false);
         dialog.setTitle("Form Pinjam Barang");
+        dialog.setCancelable(false);
+        dialog.setIcon(R.drawable.pinjam);
 
             btnTglPinjam=dialogView.findViewById(R.id.btnTanggalPinjam);
             btnTglKembali=dialogView.findViewById(R.id.btnTanggalKembali);

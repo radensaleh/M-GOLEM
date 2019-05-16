@@ -76,6 +76,8 @@ public class MenuMhsActivity extends AppCompatActivity {
             }
         });
 
+        alertDialog = new Dialog(this);
+
         btnEdit=findViewById(R.id.btnEditInfo);
         btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,8 +113,8 @@ public class MenuMhsActivity extends AppCompatActivity {
             }
         });
 
-
     }
+
     public void logout(){
         alertDialog.setContentView(R.layout.alert_keluar);
         btnTidak = alertDialog.findViewById(R.id.btnTidak);

@@ -12,7 +12,7 @@
     <de.hdodenhof.circleimageview.CircleImageView
         android:layout_width="100dp"
         android:layout_height="100dp"
-        app:civ_border_color="@color/colorAccent"
+        app:civ_border_color="@color/colorWhite"
         app:civ_border_width="3dp"
         android:src="@drawable/user"/>
 
@@ -23,7 +23,7 @@
         android:text="MASUK SEBAGAI : "
         android:fontFamily="serif-monospace"
         android:textSize="20sp"
-        android:textColor="@color/colorAccent"/>
+        android:textColor="@color/colorWhite"/>
 
     <Button
         android:id="@+id/btnLoginMhs"
@@ -31,8 +31,8 @@
         android:layout_width="250dp"
         android:text="MAHASISWA"
         android:fontFamily="serif-monospace"
-        android:textColor="@color/colorAccent"
-        android:background="@drawable/btn_shape"
+        android:textColor="@color/colorWhite"
+        android:background="@drawable/btn_shape1"
         android:layout_height="wrap_content" />
 
     <Button
@@ -41,8 +41,8 @@
         android:layout_width="250dp"
         android:text="TEKNISI"
         android:fontFamily="serif-monospace"
-        android:textColor="@color/colorAccent"
-        android:background="@drawable/btn_shape"
+        android:textColor="@color/colorWhite"
+        android:background="@drawable/btn_shape1"
         android:layout_height="wrap_content" />
 
 

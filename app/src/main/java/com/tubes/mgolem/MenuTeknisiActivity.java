@@ -16,7 +16,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tubes.mgolem.ActivityMahasiswa.UbahPasswordActivity;
+import com.tubes.mgolem.ActivityTeknisi.DataBarangTeknisiActivity;
 import com.tubes.mgolem.ActivityTeknisi.DataPengembalianActivity;
+import com.tubes.mgolem.Adapter.AdapterBarangTeknisi;
 import com.tubes.mgolem.SQLite.UserDAO;
 import com.tubes.mgolem.entitas.Teknisi;
 
@@ -24,7 +26,7 @@ public class MenuTeknisiActivity extends AppCompatActivity {
     Context context;
     Dialog alertDialog;
     private Button btnYa, btnTidak, btnLogout, btnUbahPass;
-    private CardView cvPinjam, cvKembali, cvVerifPinjam, cvVerifKembali;
+    private CardView cvPinjam, cvKembali, cvVerifPinjam, cvVerifKembali, cvDataBarang;
     private UserDAO  userDAO;
     private TextView tvUsername, tvNama;
 
@@ -63,6 +65,7 @@ public class MenuTeknisiActivity extends AppCompatActivity {
         cvKembali= findViewById(R.id.cvKembali);
         cvVerifPinjam = findViewById(R.id.cvVerifPinjam);
         cvVerifKembali= findViewById(R.id.cvVerifKembali);
+        cvDataBarang=findViewById(R.id.cvDataBarang);
 
 
         tvUsername.setText("Username : " + teknisi.getUsername());
@@ -100,6 +103,14 @@ public class MenuTeknisiActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MenuTeknisiActivity.this, DataPengembalianActivity.class);
                 intent.putExtra(DataPengembalianActivity.MENU, "VerifPengembalian");
+                startActivity(intent);
+            }
+        });
+
+        cvDataBarang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MenuTeknisiActivity.this, DataBarangTeknisiActivity.class);
                 startActivity(intent);
             }
         });

@@ -61,7 +61,7 @@ public class LoginActivity extends AppCompatActivity {
                     etPassword.setError("Minimal 8 karakter");
                 }else{
                     Mahasiswa mhs = Mahasiswa.getInstance();
-                    mhs.login(nim, pass, mContext);
+                    mhs.login(nim, pass, mContext, pd);
                 }
             }
         });

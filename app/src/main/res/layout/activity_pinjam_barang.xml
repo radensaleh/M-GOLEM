@@ -154,6 +154,9 @@
                         android:layout_height="40dp"
                         android:text="Tambah barang"
                         android:layout_margin="10dp"
+                        android:textColor="@color/colorWhite"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
                         android:background="@drawable/btn_shape" />
 
                     <android.support.v7.widget.RecyclerView
@@ -171,6 +174,9 @@
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
                     android:layout_marginTop="10dp"
+                    android:textColor="@color/colorWhite"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
                     android:background="@drawable/btn_shape" />
 
 

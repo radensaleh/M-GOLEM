@@ -55,10 +55,13 @@
 
             <Button
                 android:id="@+id/btnHapus"
-                android:layout_width="60dp"
+                android:layout_width="70dp"
                 android:layout_height="30dp"
                 android:text="Hapus"
                 android:layout_marginRight="10dp"
+                android:textColor="@color/colorWhite"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
                 android:background="@drawable/btn_shape" />
 
             <Button
@@ -66,6 +69,9 @@
                 android:layout_width="60dp"
                 android:layout_height="30dp"
                 android:text="Info"
+                android:textColor="@color/colorWhite"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
                 android:background="@drawable/btn_shape" />
 
         </LinearLayout>
