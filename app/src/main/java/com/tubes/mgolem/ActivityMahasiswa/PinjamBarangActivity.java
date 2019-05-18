@@ -248,7 +248,7 @@ public class PinjamBarangActivity extends AppCompatActivity {
                     call.enqueue(new Callback<Response>() {
                         @Override
                         public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
-                            new android.app.AlertDialog.Builder(PinjamBarangActivity.this).setTitle("Berhasil").setMessage("Peminjaman Berhasil").setCancelable(false).setIcon(R.drawable.success)
+                            new android.app.AlertDialog.Builder(PinjamBarangActivity.this).setTitle("Berhasil").setMessage(response.body().getMessage()).setCancelable(false).setIcon(R.drawable.success)
                                     .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
