@@ -1,2 +1,2 @@
 # M-GOLEM
-Mobile Based Goods Lending System Using Barcode
+Mobile Based Goods Lending System Using QR-Code
