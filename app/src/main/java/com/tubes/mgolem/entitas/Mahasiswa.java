@@ -252,7 +252,7 @@ public class Mahasiswa {
                     @Override
                     public void onFailure(Call<Response> call, Throwable t) {
                         pd.dismiss();
-                        Toast.makeText(context, t.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context,"Gagal", Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -285,7 +285,7 @@ public class Mahasiswa {
                     mhs.setPassword(password);
                     UserDAO userDAO = new UserDAO(context);
                     userDAO.ubahPassword(password);
-                    new AlertDialog.Builder(context).setTitle("Info").setMessage(response.body().getMessage()).setCancelable(false)
+                    new AlertDialog.Builder(context).setTitle("Berhasil").setMessage(response.body().getMessage()).setCancelable(false).setIcon(R.drawable.success)
                             .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
@@ -305,7 +305,7 @@ public class Mahasiswa {
 
             @Override
             public void onFailure(Call<Response> call, Throwable t) {
-
+                Toast.makeText(context,"Gagal", Toast.LENGTH_SHORT).show();
             }
         });
     }

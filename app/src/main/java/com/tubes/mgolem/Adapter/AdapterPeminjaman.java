@@ -117,7 +117,7 @@ public class AdapterPeminjaman extends RecyclerView.Adapter<AdapterPeminjaman.My
                         data.append("Nama : "+response.body().getNama_mhs()+"\n");
                         data.append("Kelas : "+response.body().getId_kelas());
 
-                        new AlertDialog.Builder(context).setTitle("Data Mahasiswa").setMessage(data).setCancelable(false)
+                        new AlertDialog.Builder(context).setTitle("Data Mahasiswa").setMessage(data).setCancelable(false).setIcon(R.drawable.mahasiswa)
                                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
@@ -153,7 +153,7 @@ public class AdapterPeminjaman extends RecyclerView.Adapter<AdapterPeminjaman.My
                             }
                         }
 
-                        new AlertDialog.Builder(context).setTitle("Daftar Barang").setMessage(data).setCancelable(false)
+                        new AlertDialog.Builder(context).setTitle("Daftar Barang").setMessage(data).setCancelable(false).setIcon(R.drawable.barang)
                                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {

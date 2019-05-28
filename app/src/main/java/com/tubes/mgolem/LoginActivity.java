@@ -52,7 +52,7 @@ public class LoginActivity extends AppCompatActivity {
                 String pass = etPassword.getText().toString();
 
                 if(nim.isEmpty()){
-                    etNim.setError("Username Kosong");
+                    etNim.setError("NIM Kosong");
                 }else if(nim.length() < 7){
                     etNim.setError("Minimal 7 karakter");
                 }else if(pass.isEmpty()){
